@@ -30,15 +30,17 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             panelMenu = new Panel();
-            btnStartGame = new Button();
             panelCentroMenu = new Panel();
+            btnStartGame = new Button();
             btnExitGame = new Button();
             panelJogo1 = new Panel();
+            panelCentroJogo1 = new Panel();
             pictureEnemy = new PictureBox();
             progressVida = new ProgressBar();
             panelMenu.SuspendLayout();
             panelCentroMenu.SuspendLayout();
             panelJogo1.SuspendLayout();
+            panelCentroJogo1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureEnemy).BeginInit();
             SuspendLayout();
             // 
@@ -51,16 +53,6 @@
             panelMenu.Size = new Size(800, 450);
             panelMenu.TabIndex = 0;
             // 
-            // btnStartGame
-            // 
-            btnStartGame.Location = new Point(348, 261);
-            btnStartGame.Name = "btnStartGame";
-            btnStartGame.Size = new Size(75, 23);
-            btnStartGame.TabIndex = 0;
-            btnStartGame.Text = "Jogar";
-            btnStartGame.UseVisualStyleBackColor = true;
-            btnStartGame.Click += btnStartGame_Click;
-            // 
             // panelCentroMenu
             // 
             panelCentroMenu.Anchor = AnchorStyles.None;
@@ -70,6 +62,16 @@
             panelCentroMenu.Name = "panelCentroMenu";
             panelCentroMenu.Size = new Size(776, 426);
             panelCentroMenu.TabIndex = 2;
+            // 
+            // btnStartGame
+            // 
+            btnStartGame.Location = new Point(348, 261);
+            btnStartGame.Name = "btnStartGame";
+            btnStartGame.Size = new Size(75, 23);
+            btnStartGame.TabIndex = 0;
+            btnStartGame.Text = "Jogar";
+            btnStartGame.UseVisualStyleBackColor = true;
+            btnStartGame.Click += btnStartGame_Click;
             // 
             // btnExitGame
             // 
@@ -83,8 +85,7 @@
             // 
             // panelJogo1
             // 
-            panelJogo1.Controls.Add(pictureEnemy);
-            panelJogo1.Controls.Add(progressVida);
+            panelJogo1.Controls.Add(panelCentroJogo1);
             panelJogo1.Dock = DockStyle.Fill;
             panelJogo1.Location = new Point(0, 0);
             panelJogo1.Name = "panelJogo1";
@@ -92,10 +93,19 @@
             panelJogo1.TabIndex = 1;
             panelJogo1.Visible = false;
             // 
+            // panelCentroJogo1
+            // 
+            panelCentroJogo1.Controls.Add(pictureEnemy);
+            panelCentroJogo1.Controls.Add(progressVida);
+            panelCentroJogo1.Location = new Point(0, 0);
+            panelCentroJogo1.Name = "panelCentroJogo1";
+            panelCentroJogo1.Size = new Size(800, 450);
+            panelCentroJogo1.TabIndex = 2;
+            // 
             // pictureEnemy
             // 
             pictureEnemy.Image = (Image)resources.GetObject("pictureEnemy.Image");
-            pictureEnemy.Location = new Point(302, 38);
+            pictureEnemy.Location = new Point(311, 12);
             pictureEnemy.Name = "pictureEnemy";
             pictureEnemy.Size = new Size(172, 172);
             pictureEnemy.SizeMode = PictureBoxSizeMode.Zoom;
@@ -104,7 +114,7 @@
             // 
             // progressVida
             // 
-            progressVida.Location = new Point(12, 415);
+            progressVida.Location = new Point(3, 412);
             progressVida.Name = "progressVida";
             progressVida.Size = new Size(149, 23);
             progressVida.Style = ProgressBarStyle.Continuous;
@@ -116,8 +126,8 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(panelMenu);
             Controls.Add(panelJogo1);
+            Controls.Add(panelMenu);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
@@ -126,6 +136,7 @@
             panelMenu.ResumeLayout(false);
             panelCentroMenu.ResumeLayout(false);
             panelJogo1.ResumeLayout(false);
+            panelCentroJogo1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureEnemy).EndInit();
             ResumeLayout(false);
         }
@@ -139,5 +150,6 @@
         private ProgressBar progressVida;
         private PictureBox pictureEnemy;
         private Panel panelCentroMenu;
+        private Panel panelCentroJogo1;
     }
 }

@@ -35,6 +35,7 @@ namespace JogoTeste
         private void Form1_Resize(object sender, EventArgs e)
         {
             Centralizar(panelCentroMenu, panelMenu);
+            Centralizar(panelCentroJogo1, panelJogo1);
         }
     }
 }
