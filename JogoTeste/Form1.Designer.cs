@@ -37,11 +37,15 @@
             panelCentroJogo1 = new Panel();
             pictureEnemy = new PictureBox();
             progressVida = new ProgressBar();
+            panelControls = new Panel();
+            panelEnemies = new Panel();
             panelMenu.SuspendLayout();
             panelCentroMenu.SuspendLayout();
             panelJogo1.SuspendLayout();
             panelCentroJogo1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureEnemy).BeginInit();
+            panelControls.SuspendLayout();
+            panelEnemies.SuspendLayout();
             SuspendLayout();
             // 
             // panelMenu
@@ -95,8 +99,8 @@
             // 
             // panelCentroJogo1
             // 
-            panelCentroJogo1.Controls.Add(pictureEnemy);
-            panelCentroJogo1.Controls.Add(progressVida);
+            panelCentroJogo1.Controls.Add(panelEnemies);
+            panelCentroJogo1.Controls.Add(panelControls);
             panelCentroJogo1.Location = new Point(0, 0);
             panelCentroJogo1.Name = "panelCentroJogo1";
             panelCentroJogo1.Size = new Size(800, 450);
@@ -105,21 +109,37 @@
             // pictureEnemy
             // 
             pictureEnemy.Image = (Image)resources.GetObject("pictureEnemy.Image");
-            pictureEnemy.Location = new Point(311, 12);
+            pictureEnemy.Location = new Point(325, 3);
             pictureEnemy.Name = "pictureEnemy";
-            pictureEnemy.Size = new Size(172, 172);
+            pictureEnemy.Size = new Size(123, 145);
             pictureEnemy.SizeMode = PictureBoxSizeMode.Zoom;
             pictureEnemy.TabIndex = 1;
             pictureEnemy.TabStop = false;
             // 
             // progressVida
             // 
-            progressVida.Location = new Point(3, 412);
+            progressVida.Location = new Point(3, 150);
             progressVida.Name = "progressVida";
             progressVida.Size = new Size(149, 23);
             progressVida.Style = ProgressBarStyle.Continuous;
             progressVida.TabIndex = 0;
             progressVida.Value = 100;
+            // 
+            // panelControls
+            // 
+            panelControls.Controls.Add(progressVida);
+            panelControls.Location = new Point(12, 259);
+            panelControls.Name = "panelControls";
+            panelControls.Size = new Size(773, 176);
+            panelControls.TabIndex = 2;
+            // 
+            // panelEnemies
+            // 
+            panelEnemies.Controls.Add(pictureEnemy);
+            panelEnemies.Location = new Point(15, 15);
+            panelEnemies.Name = "panelEnemies";
+            panelEnemies.Size = new Size(770, 238);
+            panelEnemies.TabIndex = 3;
             // 
             // Form1
             // 
@@ -138,6 +158,8 @@
             panelJogo1.ResumeLayout(false);
             panelCentroJogo1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureEnemy).EndInit();
+            panelControls.ResumeLayout(false);
+            panelEnemies.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -151,5 +173,7 @@
         private PictureBox pictureEnemy;
         private Panel panelCentroMenu;
         private Panel panelCentroJogo1;
+        private Panel panelEnemies;
+        private Panel panelControls;
     }
 }
