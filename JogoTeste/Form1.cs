@@ -86,5 +86,11 @@ namespace JogoTeste
         {
             labelEnergia.Visible = false;
         }
+
+        private void DanoAoPlayer(int dano)
+        {
+            vidaAtual -= dano;
+            AtualizarRecursos();
+        }
     }
 }

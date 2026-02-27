@@ -46,8 +46,9 @@
             labelVida = new Label();
             btnStatus = new Button();
             btnItems = new Button();
-            btnDefend = new Button();
+            btnSkills = new Button();
             btnAttack = new Button();
+            panelSkillsMenu = new Panel();
             panelMenu.SuspendLayout();
             panelCentroMenu.SuspendLayout();
             panelJogo1.SuspendLayout();
@@ -114,6 +115,7 @@
             // 
             panelCentroJogo1.Controls.Add(panelEnemies);
             panelCentroJogo1.Controls.Add(panelControls);
+            panelCentroJogo1.Controls.Add(panelSkillsMenu);
             panelCentroJogo1.Location = new Point(0, 0);
             panelCentroJogo1.Name = "panelCentroJogo1";
             panelCentroJogo1.Size = new Size(800, 450);
@@ -143,7 +145,7 @@
             panelControls.Controls.Add(panelFundoVida);
             panelControls.Controls.Add(btnStatus);
             panelControls.Controls.Add(btnItems);
-            panelControls.Controls.Add(btnDefend);
+            panelControls.Controls.Add(btnSkills);
             panelControls.Controls.Add(btnAttack);
             panelControls.Location = new Point(12, 259);
             panelControls.Name = "panelControls";
@@ -210,7 +212,7 @@
             // 
             // btnStatus
             // 
-            btnStatus.Location = new Point(519, 14);
+            btnStatus.Location = new Point(516, 53);
             btnStatus.Name = "btnStatus";
             btnStatus.Size = new Size(125, 61);
             btnStatus.TabIndex = 4;
@@ -219,30 +221,38 @@
             // 
             // btnItems
             // 
-            btnItems.Location = new Point(388, 14);
+            btnItems.Location = new Point(385, 53);
             btnItems.Name = "btnItems";
             btnItems.Size = new Size(125, 61);
             btnItems.TabIndex = 3;
             btnItems.Text = "Itens";
             btnItems.UseVisualStyleBackColor = true;
             // 
-            // btnDefend
+            // btnSkills
             // 
-            btnDefend.Location = new Point(257, 14);
-            btnDefend.Name = "btnDefend";
-            btnDefend.Size = new Size(125, 61);
-            btnDefend.TabIndex = 2;
-            btnDefend.Text = "Defender";
-            btnDefend.UseVisualStyleBackColor = true;
+            btnSkills.Location = new Point(254, 53);
+            btnSkills.Name = "btnSkills";
+            btnSkills.Size = new Size(125, 61);
+            btnSkills.TabIndex = 2;
+            btnSkills.Text = "Habilidades";
+            btnSkills.UseVisualStyleBackColor = true;
             // 
             // btnAttack
             // 
-            btnAttack.Location = new Point(126, 14);
+            btnAttack.Location = new Point(123, 53);
             btnAttack.Name = "btnAttack";
             btnAttack.Size = new Size(125, 61);
             btnAttack.TabIndex = 1;
             btnAttack.Text = "Atacar";
             btnAttack.UseVisualStyleBackColor = true;
+            // 
+            // panelSkillsMenu
+            // 
+            panelSkillsMenu.Location = new Point(12, 259);
+            panelSkillsMenu.Name = "panelSkillsMenu";
+            panelSkillsMenu.Size = new Size(773, 176);
+            panelSkillsMenu.TabIndex = 4;
+            panelSkillsMenu.Visible = false;
             // 
             // Form1
             // 
@@ -285,7 +295,7 @@
         private Panel panelControls;
         private Button btnStatus;
         private Button btnItems;
-        private Button btnDefend;
+        private Button btnSkills;
         private Button btnAttack;
         private Panel panelFundoEnergia;
         private Panel panelFrenteEnergia;
@@ -293,5 +303,6 @@
         private Panel panelFrenteVida;
         private Label labelVida;
         private Label labelEnergia;
+        private Panel panelSkillsMenu;
     }
 }
