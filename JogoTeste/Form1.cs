@@ -26,10 +26,15 @@ namespace JogoTeste
             progressVida.Value = vidaJogador;
         }
 
+        private void Centralizar(Panel interno, Panel pai)
+        {
+            interno.Left = (pai.Width - interno.Width) / 2;
+            interno.Top = (pai.Height - interno.Height) / 2;
+        }
+
         private void Form1_Resize(object sender, EventArgs e)
         {
-            panelCentroMenu.Left = (this.ClientSize.Width - panelCentroMenu.Width) / 2;
-            panelCentroMenu.Top = (this.ClientSize.Height - panelCentroMenu.Height) / 2;
+            Centralizar(panelCentroMenu, panelMenu);
         }
     }
 }
