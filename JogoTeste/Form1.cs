@@ -6,5 +6,15 @@ namespace JogoTeste
         {
             InitializeComponent();
         }
+
+        private void btnStartGame_Click(object sender, EventArgs e)
+        {
+            panelMenu.Visible = false;
+        }
+
+        private void btnExitGame_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
