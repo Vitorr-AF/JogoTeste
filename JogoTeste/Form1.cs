@@ -55,12 +55,36 @@ namespace JogoTeste
             {
                 panelFrenteVida.BackColor = Color.LimeGreen;
             }
-            
+
             int larguraVida = (int)((vidaAtual / (float)vidaMax) * panelFundoVida.Width);
             int larguraEnergia = (int)((energiaAtual / (float)energiaMax) * panelFundoEnergia.Width);
 
             panelFrenteVida.Width = larguraVida;
             panelFrenteEnergia.Width = larguraEnergia;
+        }
+
+        private void panelFrenteVida_MouseEnter(object sender, EventArgs e)
+        {
+            labelVida.Text = $"{vidaAtual}/{vidaMax}";
+
+            labelVida.Visible = true;
+        }
+
+        private void panelFrenteVida_MouseLeave(object sender, EventArgs e)
+        {
+            labelVida.Visible = false;
+        }
+
+        private void panelFrenteEnergia_MouseEnter(object sender, EventArgs e)
+        {
+            labelEnergia.Text = $"{energiaAtual}/{energiaMax}";
+
+            labelEnergia.Visible = true;
+        }
+
+        private void panelFrenteEnergia_MouseLeave(object sender, EventArgs e)
+        {
+            labelEnergia.Visible = false;
         }
     }
 }

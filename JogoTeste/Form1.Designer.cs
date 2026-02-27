@@ -40,8 +40,10 @@
             panelControls = new Panel();
             panelFundoEnergia = new Panel();
             panelFrenteEnergia = new Panel();
+            labelEnergia = new Label();
             panelFundoVida = new Panel();
             panelFrenteVida = new Panel();
+            labelVida = new Label();
             btnStatus = new Button();
             btnItems = new Button();
             btnDefend = new Button();
@@ -54,7 +56,9 @@
             ((System.ComponentModel.ISupportInitialize)pictureEnemy).BeginInit();
             panelControls.SuspendLayout();
             panelFundoEnergia.SuspendLayout();
+            panelFrenteEnergia.SuspendLayout();
             panelFundoVida.SuspendLayout();
+            panelFrenteVida.SuspendLayout();
             SuspendLayout();
             // 
             // panelMenu
@@ -158,10 +162,22 @@
             // panelFrenteEnergia
             // 
             panelFrenteEnergia.BackColor = Color.DodgerBlue;
+            panelFrenteEnergia.Controls.Add(labelEnergia);
             panelFrenteEnergia.Location = new Point(0, 0);
             panelFrenteEnergia.Name = "panelFrenteEnergia";
             panelFrenteEnergia.Size = new Size(200, 26);
             panelFrenteEnergia.TabIndex = 6;
+            panelFrenteEnergia.MouseEnter += panelFrenteEnergia_MouseEnter;
+            panelFrenteEnergia.MouseLeave += panelFrenteEnergia_MouseLeave;
+            // 
+            // labelEnergia
+            // 
+            labelEnergia.AutoSize = true;
+            labelEnergia.Location = new Point(80, 4);
+            labelEnergia.Name = "labelEnergia";
+            labelEnergia.Size = new Size(0, 15);
+            labelEnergia.TabIndex = 8;
+            labelEnergia.Visible = false;
             // 
             // panelFundoVida
             // 
@@ -175,10 +191,22 @@
             // panelFrenteVida
             // 
             panelFrenteVida.BackColor = Color.Lime;
+            panelFrenteVida.Controls.Add(labelVida);
             panelFrenteVida.Location = new Point(0, 0);
             panelFrenteVida.Name = "panelFrenteVida";
             panelFrenteVida.Size = new Size(200, 26);
             panelFrenteVida.TabIndex = 6;
+            panelFrenteVida.MouseEnter += panelFrenteVida_MouseEnter;
+            panelFrenteVida.MouseLeave += panelFrenteVida_MouseLeave;
+            // 
+            // labelVida
+            // 
+            labelVida.AutoSize = true;
+            labelVida.Location = new Point(80, 4);
+            labelVida.Name = "labelVida";
+            labelVida.Size = new Size(0, 15);
+            labelVida.TabIndex = 8;
+            labelVida.Visible = false;
             // 
             // btnStatus
             // 
@@ -236,7 +264,11 @@
             ((System.ComponentModel.ISupportInitialize)pictureEnemy).EndInit();
             panelControls.ResumeLayout(false);
             panelFundoEnergia.ResumeLayout(false);
+            panelFrenteEnergia.ResumeLayout(false);
+            panelFrenteEnergia.PerformLayout();
             panelFundoVida.ResumeLayout(false);
+            panelFrenteVida.ResumeLayout(false);
+            panelFrenteVida.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -259,5 +291,7 @@
         private Panel panelFrenteEnergia;
         private Panel panelFundoVida;
         private Panel panelFrenteVida;
+        private Label labelVida;
+        private Label labelEnergia;
     }
 }
