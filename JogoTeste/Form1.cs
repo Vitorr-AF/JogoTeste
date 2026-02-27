@@ -2,10 +2,15 @@ namespace JogoTeste
 {
     public partial class Form1 : Form
     {
-        int vidaMax;
-        int vidaAtual;
-        int energiaMax;
-        int energiaAtual;
+        private Player player;
+
+        public class Player
+        {
+            public int VidaMax;
+            public int VidaAtual;
+            public int EnergiaMax;
+            public int EnergiaAtual;
+        }
 
         public Form1()
         {
@@ -26,10 +31,13 @@ namespace JogoTeste
 
         private void IniciarJogo()
         {
-            vidaMax = 100;
-            vidaAtual = 100;
-            energiaMax = 100;
-            energiaAtual = 100;
+            player = new Player
+            {
+                VidaMax = 100,
+                VidaAtual = 100,
+                EnergiaMax = 100,
+                EnergiaAtual = 100,
+            };
             AtualizarRecursos();
         }
 
@@ -47,7 +55,7 @@ namespace JogoTeste
 
         private void AtualizarRecursos()
         {
-            if (vidaAtual < (vidaMax * 0.3))
+            if (player.VidaAtual < (player.VidaMax * 0.3))
             {
                 panelFrenteVida.BackColor = Color.Red;
             }
@@ -56,8 +64,8 @@ namespace JogoTeste
                 panelFrenteVida.BackColor = Color.LimeGreen;
             }
 
-            int larguraVida = (int)((vidaAtual / (float)vidaMax) * panelFundoVida.Width);
-            int larguraEnergia = (int)((energiaAtual / (float)energiaMax) * panelFundoEnergia.Width);
+            int larguraVida = (int)((player.VidaAtual / (float)player.VidaMax) * panelFundoVida.Width);
+            int larguraEnergia = (int)((player.EnergiaAtual / (float)player.EnergiaMax) * panelFundoEnergia.Width);
 
             panelFrenteVida.Width = larguraVida;
             panelFrenteEnergia.Width = larguraEnergia;
@@ -65,7 +73,7 @@ namespace JogoTeste
 
         private void panelFrenteVida_MouseEnter(object sender, EventArgs e)
         {
-            labelVida.Text = $"{vidaAtual}/{vidaMax}";
+            labelVida.Text = $"{player.VidaAtual}/{player.VidaMax}";
 
             labelVida.Visible = true;
         }
@@ -77,7 +85,7 @@ namespace JogoTeste
 
         private void panelFrenteEnergia_MouseEnter(object sender, EventArgs e)
         {
-            labelEnergia.Text = $"{energiaAtual}/{energiaMax}";
+            labelEnergia.Text = $"{player.EnergiaAtual}/{player.EnergiaMax}";
 
             labelEnergia.Visible = true;
         }
@@ -92,5 +100,20 @@ namespace JogoTeste
             vidaAtual -= dano;
             AtualizarRecursos();
         }
+
+        private void AtacarAlvo(int alvoId, int dano)
+        {
+
+        }
+
+        public class Inimigo
+        {
+            public int Vida { get; set; }
+            public string Nome { get; set; }
+        }
+
+        List<Inimigo> inimigos = new List<Inimigo>();
+
+        
     }
 }

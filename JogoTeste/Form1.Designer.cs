@@ -132,7 +132,7 @@
             // pictureEnemy
             // 
             pictureEnemy.Image = (Image)resources.GetObject("pictureEnemy.Image");
-            pictureEnemy.Location = new Point(325, 3);
+            pictureEnemy.Location = new Point(317, 19);
             pictureEnemy.Name = "pictureEnemy";
             pictureEnemy.Size = new Size(123, 145);
             pictureEnemy.SizeMode = PictureBoxSizeMode.Zoom;
