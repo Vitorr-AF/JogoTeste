@@ -28,34 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             panelMenu = new Panel();
-            btnExitGame = new Button();
             btnStartGame = new Button();
+            panelCentroMenu = new Panel();
+            btnExitGame = new Button();
+            panelJogo1 = new Panel();
+            pictureEnemy = new PictureBox();
+            progressVida = new ProgressBar();
             panelMenu.SuspendLayout();
+            panelCentroMenu.SuspendLayout();
+            panelJogo1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureEnemy).BeginInit();
             SuspendLayout();
             // 
             // panelMenu
             // 
-            panelMenu.Controls.Add(btnExitGame);
-            panelMenu.Controls.Add(btnStartGame);
+            panelMenu.Controls.Add(panelCentroMenu);
+            panelMenu.Dock = DockStyle.Fill;
             panelMenu.Location = new Point(0, 0);
             panelMenu.Name = "panelMenu";
-            panelMenu.Size = new Size(805, 456);
+            panelMenu.Size = new Size(800, 450);
             panelMenu.TabIndex = 0;
-            // 
-            // btnExitGame
-            // 
-            btnExitGame.Location = new Point(351, 344);
-            btnExitGame.Name = "btnExitGame";
-            btnExitGame.Size = new Size(75, 23);
-            btnExitGame.TabIndex = 1;
-            btnExitGame.Text = "Sair";
-            btnExitGame.UseVisualStyleBackColor = true;
-            btnExitGame.Click += btnExitGame_Click;
             // 
             // btnStartGame
             // 
-            btnStartGame.Location = new Point(351, 285);
+            btnStartGame.Location = new Point(348, 261);
             btnStartGame.Name = "btnStartGame";
             btnStartGame.Size = new Size(75, 23);
             btnStartGame.TabIndex = 0;
@@ -63,15 +61,72 @@
             btnStartGame.UseVisualStyleBackColor = true;
             btnStartGame.Click += btnStartGame_Click;
             // 
+            // panelCentroMenu
+            // 
+            panelCentroMenu.Anchor = AnchorStyles.None;
+            panelCentroMenu.Controls.Add(btnStartGame);
+            panelCentroMenu.Controls.Add(btnExitGame);
+            panelCentroMenu.Location = new Point(12, 12);
+            panelCentroMenu.Name = "panelCentroMenu";
+            panelCentroMenu.Size = new Size(776, 426);
+            panelCentroMenu.TabIndex = 2;
+            // 
+            // btnExitGame
+            // 
+            btnExitGame.Location = new Point(348, 328);
+            btnExitGame.Name = "btnExitGame";
+            btnExitGame.Size = new Size(75, 23);
+            btnExitGame.TabIndex = 1;
+            btnExitGame.Text = "Sair";
+            btnExitGame.UseVisualStyleBackColor = true;
+            btnExitGame.Click += btnExitGame_Click;
+            // 
+            // panelJogo1
+            // 
+            panelJogo1.Controls.Add(pictureEnemy);
+            panelJogo1.Controls.Add(progressVida);
+            panelJogo1.Dock = DockStyle.Fill;
+            panelJogo1.Location = new Point(0, 0);
+            panelJogo1.Name = "panelJogo1";
+            panelJogo1.Size = new Size(800, 450);
+            panelJogo1.TabIndex = 1;
+            panelJogo1.Visible = false;
+            // 
+            // pictureEnemy
+            // 
+            pictureEnemy.Image = (Image)resources.GetObject("pictureEnemy.Image");
+            pictureEnemy.Location = new Point(302, 38);
+            pictureEnemy.Name = "pictureEnemy";
+            pictureEnemy.Size = new Size(172, 172);
+            pictureEnemy.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureEnemy.TabIndex = 1;
+            pictureEnemy.TabStop = false;
+            // 
+            // progressVida
+            // 
+            progressVida.Location = new Point(12, 415);
+            progressVida.Name = "progressVida";
+            progressVida.Size = new Size(149, 23);
+            progressVida.Style = ProgressBarStyle.Continuous;
+            progressVida.TabIndex = 0;
+            progressVida.Value = 100;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(panelMenu);
+            Controls.Add(panelJogo1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
+            Resize += Form1_Resize;
             panelMenu.ResumeLayout(false);
+            panelCentroMenu.ResumeLayout(false);
+            panelJogo1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureEnemy).EndInit();
             ResumeLayout(false);
         }
 
@@ -80,5 +135,9 @@
         private Panel panelMenu;
         private Button btnExitGame;
         private Button btnStartGame;
+        private Panel panelJogo1;
+        private ProgressBar progressVida;
+        private PictureBox pictureEnemy;
+        private Panel panelCentroMenu;
     }
 }
