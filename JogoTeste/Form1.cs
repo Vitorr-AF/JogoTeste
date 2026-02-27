@@ -2,7 +2,11 @@ namespace JogoTeste
 {
     public partial class Form1 : Form
     {
-        int vidaJogador;
+        int vidaMax;
+        int vidaAtual;
+        int energiaMax;
+        int energiaAtual;
+
         public Form1()
         {
             InitializeComponent();
@@ -22,8 +26,11 @@ namespace JogoTeste
 
         private void IniciarJogo()
         {
-            vidaJogador = 100;
-            progressVida.Value = vidaJogador;
+            vidaMax = 100;
+            vidaAtual = 100;
+            energiaMax = 100;
+            energiaAtual = 100;
+            AtualizarRecursos();
         }
 
         private void Centralizar(Panel interno, Panel pai)
@@ -36,6 +43,24 @@ namespace JogoTeste
         {
             Centralizar(panelCentroMenu, panelMenu);
             Centralizar(panelCentroJogo1, panelJogo1);
+        }
+
+        private void AtualizarRecursos()
+        {
+            if (vidaAtual < (vidaMax * 0.3))
+            {
+                panelFrenteVida.BackColor = Color.Red;
+            }
+            else
+            {
+                panelFrenteVida.BackColor = Color.LimeGreen;
+            }
+            
+            int larguraVida = (int)((vidaAtual / (float)vidaMax) * panelFundoVida.Width);
+            int larguraEnergia = (int)((energiaAtual / (float)energiaMax) * panelFundoEnergia.Width);
+
+            panelFrenteVida.Width = larguraVida;
+            panelFrenteEnergia.Width = larguraEnergia;
         }
     }
 }
