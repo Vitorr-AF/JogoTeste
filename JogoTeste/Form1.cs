@@ -42,6 +42,8 @@ namespace JogoTeste
             public int VidaAtual;
             public int EnergiaMax;
             public int EnergiaAtual;
+            public int DanoAtaque;
+            public int TaxaAcerto;
         }
         public class Inimigo
         {
@@ -74,6 +76,8 @@ namespace JogoTeste
                 VidaAtual = 100,
                 EnergiaMax = 100,
                 EnergiaAtual = 100,
+                DanoAtaque = 100,
+                TaxaAcerto = 100,
             };
             AtualizarRecursos();
             ProximaOnda(1);
@@ -117,6 +121,7 @@ namespace JogoTeste
 
             int larguraVida = (int)((player.VidaAtual / (float)player.VidaMax) * panelFundoVida.Width);
             int larguraEnergia = (int)((player.EnergiaAtual / (float)player.EnergiaMax) * panelFundoEnergia.Width);
+            
 
             panelFrenteVida.Width = larguraVida;
             panelFrenteEnergia.Width = larguraEnergia;
@@ -166,8 +171,26 @@ namespace JogoTeste
 
         private void btnAttack_Click(object sender, EventArgs e)
         {
+            Inimigo inimigo = inimigos[inimigoSelecionadoIndice];
+            int numeroAcerto = random.Next(1, 101);
 
+            if (numeroAcerto <= player.TaxaAcerto)
+            {
+                DanoAoInimigo(player.DanoAtaque);
+            }
+            else
+            {
+                ExibirMensagem("Ataque errou!!!");
+            }
+            
         }
+
+        private void ExibirMensagem(String mensagem)
+        {
+            labelMensagens.Visible = true;
+            labelMensagens.Text = mensagem;
+        }
+
 
         // Funções de Combate do Player
         private void DanoAoPlayer(int dano)
@@ -176,13 +199,15 @@ namespace JogoTeste
             AtualizarRecursos();
         }
 
-        private void AtacarAlvo(int alvoId, int dano)
+        private void DanoAoInimigo(int dano)
         {
-
+            Inimigo inimigo = inimigos[inimigoSelecionadoIndice];
+            inimigo.VidaAtual -= dano;
+            AtualizarRecursosInimigo();
         }
 
 
-        // Funções dos inimigos
+        // Funções dos inimigos (visual)
         private void CarregarInimigos()
         {
             string json = File.ReadAllText("inimigos.json");
@@ -217,11 +242,21 @@ namespace JogoTeste
             }
         }
 
+        private void AtualizarRecursosInimigo()
+        {
+            Inimigo inimigo = inimigos[inimigoSelecionadoIndice];
+
+            int larguraVidaInimigo = (int)((inimigo.VidaAtual / (float)inimigo.VidaMax) * panelFundoVidaInimigo.Width);
+            panelFrenteVidaInimigo.Width = larguraVidaInimigo;
+        }
+
         private void Inimigo_Click(object? sender, EventArgs e)
         {
             PictureBox pb = (PictureBox)sender;
             inimigoSelecionadoIndice = (int)pb.Tag;
-            labelNomeInimigo.Text = inimigos[inimigoSelecionadoIndice].Nome;
+            labelNomeInimigo.Text = $"{inimigos[inimigoSelecionadoIndice].Nome}:";
+
+            AtualizarRecursosInimigo();
 
             labelNomeInimigo.Visible = true;
 
@@ -233,31 +268,6 @@ namespace JogoTeste
             inimigos.Clear();
             imagensInimigos.Clear();
             panelEnemies.Controls.Clear();
-        }
-
-
-        private void ProximaOnda(int dificuldade)
-        {
-            LimparInimigos();
-
-            int quantidadeInimigos = random.Next(1, dificuldade + 2); // Aparentemente o random.next exclui o valor max
-            // A linha embaixo dessa é pra testar diretamente se ele tá criando a quantidade certa, por padrão é pra deixar comentada
-            //int quantidadeInimigos = 6;
-            var banco = InimigosPorNivel[dificuldade];
-            for (int i = 0; i < quantidadeInimigos; i++)
-            {
-                var modelo = banco[random.Next(banco.Count)];
-                inimigos.Add(new Inimigo
-                {
-                    Nome = modelo.Nome,
-                    VidaMax = modelo.VidaMax,
-                    VidaAtual = modelo.VidaAtual,
-                    Dano = modelo.Dano,
-                    CaminhoImagem = modelo.CaminhoImagem
-                });
-            }
-
-            CriarImagensInimigos();
         }
 
         private void panelFrenteVidaInimigo_MouseEnter(object sender, EventArgs e)
@@ -272,6 +282,31 @@ namespace JogoTeste
         private void panelFrenteVidaInimigo_MouseLeave(object sender, EventArgs e)
         {
             labelVidaInimigo.Visible = false;
+        }
+
+        // Funções dos inimigos (mecânica)
+        private void ProximaOnda(int dificuldade)
+        {
+            LimparInimigos();
+
+            int quantidadeInimigos = random.Next(1, dificuldade + 2); // Aparentemente o random.next exclui o valor max
+            // A linha embaixo dessa é mudar diretamente a quantidade, por padrão é pra deixar comentada
+            //int quantidadeInimigos = 6;
+            var banco = InimigosPorNivel[dificuldade];
+            for (int i = 0; i < quantidadeInimigos; i++)
+            {
+                var modelo = banco[random.Next(banco.Count)];
+                inimigos.Add(new Inimigo
+                {
+                    Nome = modelo.Nome,
+                    VidaMax = modelo.VidaMax,
+                    VidaAtual = modelo.VidaMax,
+                    Dano = modelo.Dano,
+                    CaminhoImagem = modelo.CaminhoImagem
+                });
+            }
+
+            CriarImagensInimigos();
         }
     }
 }

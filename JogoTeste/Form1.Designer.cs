@@ -36,6 +36,7 @@
             panelCentroJogo1 = new Panel();
             panelEnemies = new Panel();
             panelControls = new Panel();
+            labelNomeInimigo = new Label();
             panelFundoVidaInimigo = new Panel();
             panelFrenteVidaInimigo = new Panel();
             labelVidaInimigo = new Label();
@@ -55,7 +56,7 @@
             btnVoltar2 = new Button();
             panelSkillsMenu = new Panel();
             btnVoltar1 = new Button();
-            labelNomeInimigo = new Label();
+            labelMensagens = new Label();
             panelMenu.SuspendLayout();
             panelCentroMenu.SuspendLayout();
             panelJogo1.SuspendLayout();
@@ -142,6 +143,7 @@
             // 
             // panelControls
             // 
+            panelControls.Controls.Add(labelMensagens);
             panelControls.Controls.Add(labelNomeInimigo);
             panelControls.Controls.Add(panelFundoVidaInimigo);
             panelControls.Controls.Add(panelFundoEnergia);
@@ -155,11 +157,20 @@
             panelControls.Size = new Size(773, 176);
             panelControls.TabIndex = 2;
             // 
+            // labelNomeInimigo
+            // 
+            labelNomeInimigo.AutoSize = true;
+            labelNomeInimigo.Location = new Point(3, 3);
+            labelNomeInimigo.Name = "labelNomeInimigo";
+            labelNomeInimigo.Size = new Size(0, 15);
+            labelNomeInimigo.TabIndex = 8;
+            labelNomeInimigo.Visible = false;
+            // 
             // panelFundoVidaInimigo
             // 
             panelFundoVidaInimigo.BackColor = Color.DimGray;
             panelFundoVidaInimigo.Controls.Add(panelFrenteVidaInimigo);
-            panelFundoVidaInimigo.Location = new Point(123, 39);
+            panelFundoVidaInimigo.Location = new Point(3, 21);
             panelFundoVidaInimigo.Name = "panelFundoVidaInimigo";
             panelFundoVidaInimigo.Size = new Size(200, 26);
             panelFundoVidaInimigo.TabIndex = 7;
@@ -218,7 +229,7 @@
             // 
             panelFundoVida.BackColor = Color.DimGray;
             panelFundoVida.Controls.Add(panelFrenteVida);
-            panelFundoVida.Location = new Point(3, 147);
+            panelFundoVida.Location = new Point(570, 118);
             panelFundoVida.Name = "panelFundoVida";
             panelFundoVida.Size = new Size(200, 26);
             panelFundoVida.TabIndex = 5;
@@ -245,7 +256,7 @@
             // 
             // btnStatus
             // 
-            btnStatus.Location = new Point(516, 71);
+            btnStatus.Location = new Point(637, 14);
             btnStatus.Name = "btnStatus";
             btnStatus.Size = new Size(125, 61);
             btnStatus.TabIndex = 4;
@@ -255,7 +266,7 @@
             // 
             // btnItems
             // 
-            btnItems.Location = new Point(385, 71);
+            btnItems.Location = new Point(506, 14);
             btnItems.Name = "btnItems";
             btnItems.Size = new Size(125, 61);
             btnItems.TabIndex = 3;
@@ -265,7 +276,7 @@
             // 
             // btnSkills
             // 
-            btnSkills.Location = new Point(254, 71);
+            btnSkills.Location = new Point(375, 14);
             btnSkills.Name = "btnSkills";
             btnSkills.Size = new Size(125, 61);
             btnSkills.TabIndex = 2;
@@ -275,7 +286,7 @@
             // 
             // btnAttack
             // 
-            btnAttack.Location = new Point(123, 71);
+            btnAttack.Location = new Point(244, 14);
             btnAttack.Name = "btnAttack";
             btnAttack.Size = new Size(125, 61);
             btnAttack.TabIndex = 1;
@@ -340,14 +351,13 @@
             btnVoltar1.UseVisualStyleBackColor = true;
             btnVoltar1.Click += btnVoltar1_Click;
             // 
-            // labelNomeInimigo
+            // labelMensagens
             // 
-            labelNomeInimigo.AutoSize = true;
-            labelNomeInimigo.Location = new Point(123, 21);
-            labelNomeInimigo.Name = "labelNomeInimigo";
-            labelNomeInimigo.Size = new Size(0, 15);
-            labelNomeInimigo.TabIndex = 8;
-            labelNomeInimigo.Visible = false;
+            labelMensagens.AutoSize = true;
+            labelMensagens.Location = new Point(-2, 161);
+            labelMensagens.Name = "labelMensagens";
+            labelMensagens.Size = new Size(0, 15);
+            labelMensagens.TabIndex = 9;
             // 
             // Form1
             // 
@@ -412,5 +422,6 @@
         private Panel panelFrenteVidaInimigo;
         private Label labelVidaInimigo;
         private Label labelNomeInimigo;
+        private Label labelMensagens;
     }
 }
