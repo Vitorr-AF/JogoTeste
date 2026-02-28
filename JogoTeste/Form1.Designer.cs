@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             panelMenu = new Panel();
             panelCentroMenu = new Panel();
             btnStartGame = new Button();
@@ -36,8 +35,10 @@
             panelJogo1 = new Panel();
             panelCentroJogo1 = new Panel();
             panelEnemies = new Panel();
-            pictureEnemy = new PictureBox();
             panelControls = new Panel();
+            panelFundoVidaInimigo = new Panel();
+            panelFrenteVidaInimigo = new Panel();
+            labelVidaInimigo = new Label();
             panelFundoEnergia = new Panel();
             panelFrenteEnergia = new Panel();
             labelEnergia = new Label();
@@ -48,26 +49,27 @@
             btnItems = new Button();
             btnSkills = new Button();
             btnAttack = new Button();
+            panelStatusMenu = new Panel();
+            btnVoltar3 = new Button();
             panelItemsMenu = new Panel();
             btnVoltar2 = new Button();
             panelSkillsMenu = new Panel();
             btnVoltar1 = new Button();
-            panelStatusMenu = new Panel();
-            btnVoltar3 = new Button();
+            labelNomeInimigo = new Label();
             panelMenu.SuspendLayout();
             panelCentroMenu.SuspendLayout();
             panelJogo1.SuspendLayout();
             panelCentroJogo1.SuspendLayout();
-            panelEnemies.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureEnemy).BeginInit();
             panelControls.SuspendLayout();
+            panelFundoVidaInimigo.SuspendLayout();
+            panelFrenteVidaInimigo.SuspendLayout();
             panelFundoEnergia.SuspendLayout();
             panelFrenteEnergia.SuspendLayout();
             panelFundoVida.SuspendLayout();
             panelFrenteVida.SuspendLayout();
+            panelStatusMenu.SuspendLayout();
             panelItemsMenu.SuspendLayout();
             panelSkillsMenu.SuspendLayout();
-            panelStatusMenu.SuspendLayout();
             SuspendLayout();
             // 
             // panelMenu
@@ -121,11 +123,11 @@
             // 
             // panelCentroJogo1
             // 
-            panelCentroJogo1.Controls.Add(panelStatusMenu);
             panelCentroJogo1.Controls.Add(panelEnemies);
+            panelCentroJogo1.Controls.Add(panelControls);
+            panelCentroJogo1.Controls.Add(panelStatusMenu);
             panelCentroJogo1.Controls.Add(panelItemsMenu);
             panelCentroJogo1.Controls.Add(panelSkillsMenu);
-            panelCentroJogo1.Controls.Add(panelControls);
             panelCentroJogo1.Location = new Point(0, 0);
             panelCentroJogo1.Name = "panelCentroJogo1";
             panelCentroJogo1.Size = new Size(800, 450);
@@ -133,24 +135,15 @@
             // 
             // panelEnemies
             // 
-            panelEnemies.Controls.Add(pictureEnemy);
             panelEnemies.Location = new Point(15, 15);
             panelEnemies.Name = "panelEnemies";
             panelEnemies.Size = new Size(770, 238);
             panelEnemies.TabIndex = 3;
             // 
-            // pictureEnemy
-            // 
-            pictureEnemy.Image = (Image)resources.GetObject("pictureEnemy.Image");
-            pictureEnemy.Location = new Point(317, 19);
-            pictureEnemy.Name = "pictureEnemy";
-            pictureEnemy.Size = new Size(123, 145);
-            pictureEnemy.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureEnemy.TabIndex = 1;
-            pictureEnemy.TabStop = false;
-            // 
             // panelControls
             // 
+            panelControls.Controls.Add(labelNomeInimigo);
+            panelControls.Controls.Add(panelFundoVidaInimigo);
             panelControls.Controls.Add(panelFundoEnergia);
             panelControls.Controls.Add(panelFundoVida);
             panelControls.Controls.Add(btnStatus);
@@ -161,6 +154,36 @@
             panelControls.Name = "panelControls";
             panelControls.Size = new Size(773, 176);
             panelControls.TabIndex = 2;
+            // 
+            // panelFundoVidaInimigo
+            // 
+            panelFundoVidaInimigo.BackColor = Color.DimGray;
+            panelFundoVidaInimigo.Controls.Add(panelFrenteVidaInimigo);
+            panelFundoVidaInimigo.Location = new Point(123, 39);
+            panelFundoVidaInimigo.Name = "panelFundoVidaInimigo";
+            panelFundoVidaInimigo.Size = new Size(200, 26);
+            panelFundoVidaInimigo.TabIndex = 7;
+            panelFundoVidaInimigo.Visible = false;
+            // 
+            // panelFrenteVidaInimigo
+            // 
+            panelFrenteVidaInimigo.BackColor = Color.Red;
+            panelFrenteVidaInimigo.Controls.Add(labelVidaInimigo);
+            panelFrenteVidaInimigo.Location = new Point(0, 0);
+            panelFrenteVidaInimigo.Name = "panelFrenteVidaInimigo";
+            panelFrenteVidaInimigo.Size = new Size(200, 26);
+            panelFrenteVidaInimigo.TabIndex = 6;
+            panelFrenteVidaInimigo.MouseEnter += panelFrenteVidaInimigo_MouseEnter;
+            panelFrenteVidaInimigo.MouseLeave += panelFrenteVidaInimigo_MouseLeave;
+            // 
+            // labelVidaInimigo
+            // 
+            labelVidaInimigo.AutoSize = true;
+            labelVidaInimigo.Location = new Point(80, 4);
+            labelVidaInimigo.Name = "labelVidaInimigo";
+            labelVidaInimigo.Size = new Size(0, 15);
+            labelVidaInimigo.TabIndex = 8;
+            labelVidaInimigo.Visible = false;
             // 
             // panelFundoEnergia
             // 
@@ -222,7 +245,7 @@
             // 
             // btnStatus
             // 
-            btnStatus.Location = new Point(516, 53);
+            btnStatus.Location = new Point(516, 71);
             btnStatus.Name = "btnStatus";
             btnStatus.Size = new Size(125, 61);
             btnStatus.TabIndex = 4;
@@ -232,7 +255,7 @@
             // 
             // btnItems
             // 
-            btnItems.Location = new Point(385, 53);
+            btnItems.Location = new Point(385, 71);
             btnItems.Name = "btnItems";
             btnItems.Size = new Size(125, 61);
             btnItems.TabIndex = 3;
@@ -242,7 +265,7 @@
             // 
             // btnSkills
             // 
-            btnSkills.Location = new Point(254, 53);
+            btnSkills.Location = new Point(254, 71);
             btnSkills.Name = "btnSkills";
             btnSkills.Size = new Size(125, 61);
             btnSkills.TabIndex = 2;
@@ -252,13 +275,32 @@
             // 
             // btnAttack
             // 
-            btnAttack.Location = new Point(123, 53);
+            btnAttack.Location = new Point(123, 71);
             btnAttack.Name = "btnAttack";
             btnAttack.Size = new Size(125, 61);
             btnAttack.TabIndex = 1;
             btnAttack.Text = "Atacar";
             btnAttack.UseVisualStyleBackColor = true;
             btnAttack.Click += btnAttack_Click;
+            // 
+            // panelStatusMenu
+            // 
+            panelStatusMenu.Controls.Add(btnVoltar3);
+            panelStatusMenu.Location = new Point(7, 262);
+            panelStatusMenu.Name = "panelStatusMenu";
+            panelStatusMenu.Size = new Size(773, 176);
+            panelStatusMenu.TabIndex = 6;
+            panelStatusMenu.Visible = false;
+            // 
+            // btnVoltar3
+            // 
+            btnVoltar3.Location = new Point(698, 153);
+            btnVoltar3.Name = "btnVoltar3";
+            btnVoltar3.Size = new Size(75, 23);
+            btnVoltar3.TabIndex = 0;
+            btnVoltar3.Text = "Voltar";
+            btnVoltar3.UseVisualStyleBackColor = true;
+            btnVoltar3.Click += btnVoltar3_Click;
             // 
             // panelItemsMenu
             // 
@@ -298,24 +340,14 @@
             btnVoltar1.UseVisualStyleBackColor = true;
             btnVoltar1.Click += btnVoltar1_Click;
             // 
-            // panelStatusMenu
+            // labelNomeInimigo
             // 
-            panelStatusMenu.Controls.Add(btnVoltar3);
-            panelStatusMenu.Location = new Point(7, 262);
-            panelStatusMenu.Name = "panelStatusMenu";
-            panelStatusMenu.Size = new Size(773, 176);
-            panelStatusMenu.TabIndex = 6;
-            panelStatusMenu.Visible = false;
-            // 
-            // btnVoltar3
-            // 
-            btnVoltar3.Location = new Point(698, 153);
-            btnVoltar3.Name = "btnVoltar3";
-            btnVoltar3.Size = new Size(75, 23);
-            btnVoltar3.TabIndex = 0;
-            btnVoltar3.Text = "Voltar";
-            btnVoltar3.UseVisualStyleBackColor = true;
-            btnVoltar3.Click += btnVoltar3_Click;
+            labelNomeInimigo.AutoSize = true;
+            labelNomeInimigo.Location = new Point(123, 21);
+            labelNomeInimigo.Name = "labelNomeInimigo";
+            labelNomeInimigo.Size = new Size(0, 15);
+            labelNomeInimigo.TabIndex = 8;
+            labelNomeInimigo.Visible = false;
             // 
             // Form1
             // 
@@ -333,18 +365,20 @@
             panelCentroMenu.ResumeLayout(false);
             panelJogo1.ResumeLayout(false);
             panelCentroJogo1.ResumeLayout(false);
-            panelEnemies.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureEnemy).EndInit();
             panelControls.ResumeLayout(false);
+            panelControls.PerformLayout();
+            panelFundoVidaInimigo.ResumeLayout(false);
+            panelFrenteVidaInimigo.ResumeLayout(false);
+            panelFrenteVidaInimigo.PerformLayout();
             panelFundoEnergia.ResumeLayout(false);
             panelFrenteEnergia.ResumeLayout(false);
             panelFrenteEnergia.PerformLayout();
             panelFundoVida.ResumeLayout(false);
             panelFrenteVida.ResumeLayout(false);
             panelFrenteVida.PerformLayout();
+            panelStatusMenu.ResumeLayout(false);
             panelItemsMenu.ResumeLayout(false);
             panelSkillsMenu.ResumeLayout(false);
-            panelStatusMenu.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -354,7 +388,6 @@
         private Button btnExitGame;
         private Button btnStartGame;
         private Panel panelJogo1;
-        private PictureBox pictureEnemy;
         private Panel panelCentroMenu;
         private Panel panelCentroJogo1;
         private Panel panelEnemies;
@@ -375,5 +408,9 @@
         private Button btnVoltar2;
         private Panel panelStatusMenu;
         private Button btnVoltar3;
+        private Panel panelFundoVidaInimigo;
+        private Panel panelFrenteVidaInimigo;
+        private Label labelVidaInimigo;
+        private Label labelNomeInimigo;
     }
 }

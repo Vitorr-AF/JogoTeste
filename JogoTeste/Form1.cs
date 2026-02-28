@@ -1,6 +1,7 @@
 // Imports
-using System.Text.Json;
 using System.IO;
+using System.Text.Json;
+using static JogoTeste.Form1;
 
 namespace JogoTeste
 {
@@ -26,13 +27,14 @@ namespace JogoTeste
             Centralizar(panelCentroJogo1, panelJogo1);
         }
 
-        // Definição das classes e objetos
+        // Definição das classes, objetos e variáveis
         private Player player;
         private Random random = new Random();
         private Dictionary<int, List<Inimigo>> InimigosPorNivel =
             new Dictionary<int, List<Inimigo>>();
         List<Inimigo> inimigos = new List<Inimigo>();
         private List<PictureBox> imagensInimigos = new List<PictureBox>();
+        int inimigoSelecionadoIndice;
 
         public class Player
         {
@@ -46,7 +48,7 @@ namespace JogoTeste
             public string Nome { get; set; }
             public int VidaMax { get; set; }
             public int VidaAtual { get; set; }
-            public int Dano {  get; set; }
+            public int Dano { get; set; }
             public string CaminhoImagem { get; set; }
         }
 
@@ -142,7 +144,7 @@ namespace JogoTeste
         {
             VoltarMenuControles();
         }
-        
+
         // Botões do Menu de Jogo Principal
         private void btnSkills_Click(object sender, EventArgs e)
         {
@@ -158,8 +160,8 @@ namespace JogoTeste
 
         private void btnStatus_Click(object sender, EventArgs e)
         {
-            panelControls.Visible=false;
-            panelStatusMenu.Visible=true;
+            panelControls.Visible = false;
+            panelStatusMenu.Visible = true;
         }
 
         private void btnAttack_Click(object sender, EventArgs e)
@@ -178,14 +180,14 @@ namespace JogoTeste
         {
 
         }
-        
+
 
         // Funções dos inimigos
         private void CarregarInimigos()
         {
             string json = File.ReadAllText("inimigos.json");
 
-            InimigosPorNivel = 
+            InimigosPorNivel =
                 JsonSerializer.Deserialize<Dictionary<int, List<Inimigo>>>(json);
         }
         private void CriarImagensInimigos()
@@ -207,9 +209,23 @@ namespace JogoTeste
                     pb.Top = random.Next(55, 100);
                 }
 
+                pb.Tag = i;
+                pb.Click += Inimigo_Click;
+
                 panelEnemies.Controls.Add(pb);
                 imagensInimigos.Add(pb);
             }
+        }
+
+        private void Inimigo_Click(object? sender, EventArgs e)
+        {
+            PictureBox pb = (PictureBox)sender;
+            inimigoSelecionadoIndice = (int)pb.Tag;
+            labelNomeInimigo.Text = inimigos[inimigoSelecionadoIndice].Nome;
+
+            labelNomeInimigo.Visible = true;
+
+            panelFundoVidaInimigo.Visible = true;
         }
 
         private void LimparInimigos()
@@ -228,7 +244,7 @@ namespace JogoTeste
             // A linha embaixo dessa é pra testar diretamente se ele tá criando a quantidade certa, por padrão é pra deixar comentada
             //int quantidadeInimigos = 6;
             var banco = InimigosPorNivel[dificuldade];
-            for (int i=0; i<quantidadeInimigos; i++)
+            for (int i = 0; i < quantidadeInimigos; i++)
             {
                 var modelo = banco[random.Next(banco.Count)];
                 inimigos.Add(new Inimigo
@@ -244,5 +260,18 @@ namespace JogoTeste
             CriarImagensInimigos();
         }
 
+        private void panelFrenteVidaInimigo_MouseEnter(object sender, EventArgs e)
+        {
+            Inimigo inimigo = inimigos[inimigoSelecionadoIndice];
+
+            labelVidaInimigo.Text = $"{inimigo.VidaAtual}/{inimigo.VidaMax}";
+            
+            labelVidaInimigo.Visible = true;
+        }
+
+        private void panelFrenteVidaInimigo_MouseLeave(object sender, EventArgs e)
+        {
+            labelVidaInimigo.Visible = false;
+        }
     }
 }
