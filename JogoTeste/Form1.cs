@@ -2,6 +2,7 @@ namespace JogoTeste
 {
     public partial class Form1 : Form
     {
+
         private Player player;
 
         public class Player
@@ -114,6 +115,49 @@ namespace JogoTeste
 
         List<Inimigo> inimigos = new List<Inimigo>();
 
-        
+        private void btnSkills_Click(object sender, EventArgs e)
+        {
+            panelControls.Visible = false;
+            panelSkillsMenu.Visible = true;
+        }
+
+        private void VoltarMenuControles()
+        {
+            panelSkillsMenu.Visible = false;
+            panelItemsMenu.Visible = false;
+            panelStatusMenu.Visible = false;
+            panelControls.Visible = true;
+        }
+        private void btnVoltar1_Click(object sender, EventArgs e)
+        {
+            VoltarMenuControles();
+        }
+
+        private void btnVoltar2_Click(object sender, EventArgs e)
+        {
+            VoltarMenuControles();
+        }
+
+        private void btnItems_Click(object sender, EventArgs e)
+        {
+            panelControls.Visible = false;
+            panelItemsMenu.Visible = true;
+        }
+
+        private void btnStatus_Click(object sender, EventArgs e)
+        {
+            panelControls.Visible=false;
+            panelStatusMenu.Visible=true;
+        }
+
+        private void btnAttack_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnVoltar3_Click(object sender, EventArgs e)
+        {
+            VoltarMenuControles();
+        }
     }
 }

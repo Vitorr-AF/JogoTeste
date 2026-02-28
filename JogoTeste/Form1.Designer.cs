@@ -48,7 +48,12 @@
             btnItems = new Button();
             btnSkills = new Button();
             btnAttack = new Button();
+            panelItemsMenu = new Panel();
+            btnVoltar2 = new Button();
             panelSkillsMenu = new Panel();
+            btnVoltar1 = new Button();
+            panelStatusMenu = new Panel();
+            btnVoltar3 = new Button();
             panelMenu.SuspendLayout();
             panelCentroMenu.SuspendLayout();
             panelJogo1.SuspendLayout();
@@ -60,6 +65,9 @@
             panelFrenteEnergia.SuspendLayout();
             panelFundoVida.SuspendLayout();
             panelFrenteVida.SuspendLayout();
+            panelItemsMenu.SuspendLayout();
+            panelSkillsMenu.SuspendLayout();
+            panelStatusMenu.SuspendLayout();
             SuspendLayout();
             // 
             // panelMenu
@@ -113,9 +121,11 @@
             // 
             // panelCentroJogo1
             // 
+            panelCentroJogo1.Controls.Add(panelStatusMenu);
             panelCentroJogo1.Controls.Add(panelEnemies);
-            panelCentroJogo1.Controls.Add(panelControls);
+            panelCentroJogo1.Controls.Add(panelItemsMenu);
             panelCentroJogo1.Controls.Add(panelSkillsMenu);
+            panelCentroJogo1.Controls.Add(panelControls);
             panelCentroJogo1.Location = new Point(0, 0);
             panelCentroJogo1.Name = "panelCentroJogo1";
             panelCentroJogo1.Size = new Size(800, 450);
@@ -218,6 +228,7 @@
             btnStatus.TabIndex = 4;
             btnStatus.Text = "Status";
             btnStatus.UseVisualStyleBackColor = true;
+            btnStatus.Click += btnStatus_Click;
             // 
             // btnItems
             // 
@@ -227,6 +238,7 @@
             btnItems.TabIndex = 3;
             btnItems.Text = "Itens";
             btnItems.UseVisualStyleBackColor = true;
+            btnItems.Click += btnItems_Click;
             // 
             // btnSkills
             // 
@@ -236,6 +248,7 @@
             btnSkills.TabIndex = 2;
             btnSkills.Text = "Habilidades";
             btnSkills.UseVisualStyleBackColor = true;
+            btnSkills.Click += btnSkills_Click;
             // 
             // btnAttack
             // 
@@ -245,14 +258,64 @@
             btnAttack.TabIndex = 1;
             btnAttack.Text = "Atacar";
             btnAttack.UseVisualStyleBackColor = true;
+            btnAttack.Click += btnAttack_Click;
+            // 
+            // panelItemsMenu
+            // 
+            panelItemsMenu.Controls.Add(btnVoltar2);
+            panelItemsMenu.Location = new Point(9, 259);
+            panelItemsMenu.Name = "panelItemsMenu";
+            panelItemsMenu.Size = new Size(773, 176);
+            panelItemsMenu.TabIndex = 5;
+            panelItemsMenu.Visible = false;
+            // 
+            // btnVoltar2
+            // 
+            btnVoltar2.Location = new Point(698, 153);
+            btnVoltar2.Name = "btnVoltar2";
+            btnVoltar2.Size = new Size(75, 23);
+            btnVoltar2.TabIndex = 0;
+            btnVoltar2.Text = "Voltar";
+            btnVoltar2.UseVisualStyleBackColor = true;
+            btnVoltar2.Click += btnVoltar2_Click;
             // 
             // panelSkillsMenu
             // 
+            panelSkillsMenu.Controls.Add(btnVoltar1);
             panelSkillsMenu.Location = new Point(12, 259);
             panelSkillsMenu.Name = "panelSkillsMenu";
             panelSkillsMenu.Size = new Size(773, 176);
             panelSkillsMenu.TabIndex = 4;
             panelSkillsMenu.Visible = false;
+            // 
+            // btnVoltar1
+            // 
+            btnVoltar1.Location = new Point(698, 153);
+            btnVoltar1.Name = "btnVoltar1";
+            btnVoltar1.Size = new Size(75, 23);
+            btnVoltar1.TabIndex = 0;
+            btnVoltar1.Text = "Voltar";
+            btnVoltar1.UseVisualStyleBackColor = true;
+            btnVoltar1.Click += btnVoltar1_Click;
+            // 
+            // panelStatusMenu
+            // 
+            panelStatusMenu.Controls.Add(btnVoltar3);
+            panelStatusMenu.Location = new Point(7, 262);
+            panelStatusMenu.Name = "panelStatusMenu";
+            panelStatusMenu.Size = new Size(773, 176);
+            panelStatusMenu.TabIndex = 6;
+            panelStatusMenu.Visible = false;
+            // 
+            // btnVoltar3
+            // 
+            btnVoltar3.Location = new Point(698, 153);
+            btnVoltar3.Name = "btnVoltar3";
+            btnVoltar3.Size = new Size(75, 23);
+            btnVoltar3.TabIndex = 0;
+            btnVoltar3.Text = "Voltar";
+            btnVoltar3.UseVisualStyleBackColor = true;
+            btnVoltar3.Click += btnVoltar3_Click;
             // 
             // Form1
             // 
@@ -279,6 +342,9 @@
             panelFundoVida.ResumeLayout(false);
             panelFrenteVida.ResumeLayout(false);
             panelFrenteVida.PerformLayout();
+            panelItemsMenu.ResumeLayout(false);
+            panelSkillsMenu.ResumeLayout(false);
+            panelStatusMenu.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -304,5 +370,10 @@
         private Label labelVida;
         private Label labelEnergia;
         private Panel panelSkillsMenu;
+        private Button btnVoltar1;
+        private Panel panelItemsMenu;
+        private Button btnVoltar2;
+        private Panel panelStatusMenu;
+        private Button btnVoltar3;
     }
 }
