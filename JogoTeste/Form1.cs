@@ -97,7 +97,7 @@ namespace JogoTeste
 
         private void DanoAoPlayer(int dano)
         {
-            vidaAtual -= dano;
+            player.VidaAtual -= dano;
             AtualizarRecursos();
         }
 
