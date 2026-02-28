@@ -1,0 +1,24 @@
+{
+  "1": [
+    {
+      "Nome": "Slime",
+      "VidaMax": 50,
+      "Dano": 5,
+      "CaminhoImagem": "Assets/imagens/inimigo.png"
+    },
+    {
+      "Nome": "Rato",
+      "VidaMax": 40,
+      "Dano": 7,
+      "CaminhoImagem": "Assets/imagens/inimigo.png"
+    }
+  ],
+  "2": [
+    {
+      "Nome": "Goblin",
+      "VidaMax": 80,
+      "Dano": 12,
+      "CaminhoImagem": "Assets/imagens/inimigo.png"
+    }
+  ]
+}

@@ -1,3 +1,7 @@
+// Imports
+using System.Text.Json;
+using System.IO;
+
 namespace JogoTeste
 {
     public partial class Form1 : Form
@@ -6,6 +10,7 @@ namespace JogoTeste
         public Form1()
         {
             InitializeComponent();
+
         }
 
         // Funções de Centralização do form com tela cheia
@@ -21,9 +26,13 @@ namespace JogoTeste
             Centralizar(panelCentroJogo1, panelJogo1);
         }
 
-        // Definição das classes
+        // Definição das classes e objetos
         private Player player;
+        private Random random = new Random();
+        private Dictionary<int, List<Inimigo>> InimigosPorNivel =
+            new Dictionary<int, List<Inimigo>>();
         List<Inimigo> inimigos = new List<Inimigo>();
+        private List<PictureBox> imagensInimigos = new List<PictureBox>();
 
         public class Player
         {
@@ -34,8 +43,11 @@ namespace JogoTeste
         }
         public class Inimigo
         {
-            public int Vida { get; set; }
             public string Nome { get; set; }
+            public int VidaMax { get; set; }
+            public int VidaAtual { get; set; }
+            public int Dano {  get; set; }
+            public string CaminhoImagem { get; set; }
         }
 
         // Botões do Menu de Inicio, e suas funções
@@ -53,6 +65,7 @@ namespace JogoTeste
 
         private void IniciarJogo()
         {
+            CarregarInimigos();
             player = new Player
             {
                 VidaMax = 100,
@@ -61,6 +74,7 @@ namespace JogoTeste
                 EnergiaAtual = 100,
             };
             AtualizarRecursos();
+            ProximaOnda(1);
         }
 
         // Barra de Vida e de Energia, e suas funções
@@ -153,7 +167,7 @@ namespace JogoTeste
 
         }
 
-        // Funções de Combate
+        // Funções de Combate do Player
         private void DanoAoPlayer(int dano)
         {
             player.VidaAtual -= dano;
@@ -166,7 +180,69 @@ namespace JogoTeste
         }
         
 
+        // Funções dos inimigos
+        private void CarregarInimigos()
+        {
+            string json = File.ReadAllText("inimigos.json");
 
+            InimigosPorNivel = 
+                JsonSerializer.Deserialize<Dictionary<int, List<Inimigo>>>(json);
+        }
+        private void CriarImagensInimigos()
+        {
+            for (int i = 0; i < inimigos.Count; i++)
+            {
+                PictureBox pb = new PictureBox();
+                pb.Size = new Size(100, 100);
+                pb.SizeMode = PictureBoxSizeMode.StretchImage;
+                pb.Image = Image.FromFile(inimigos[i].CaminhoImagem);
+
+                pb.Left = 50 + (i * 120);
+                if (i % 2 == 0)
+                {
+                    pb.Top = random.Next(10, 54);
+                }
+                else
+                {
+                    pb.Top = random.Next(55, 100);
+                }
+
+                panelEnemies.Controls.Add(pb);
+                imagensInimigos.Add(pb);
+            }
+        }
+
+        private void LimparInimigos()
+        {
+            inimigos.Clear();
+            imagensInimigos.Clear();
+            panelEnemies.Controls.Clear();
+        }
+
+
+        private void ProximaOnda(int dificuldade)
+        {
+            LimparInimigos();
+
+            int quantidadeInimigos = random.Next(1, dificuldade + 2); // Aparentemente o random.next exclui o valor max
+            // A linha embaixo dessa é pra testar diretamente se ele tá criando a quantidade certa, por padrão é pra deixar comentada
+            //int quantidadeInimigos = 6;
+            var banco = InimigosPorNivel[dificuldade];
+            for (int i=0; i<quantidadeInimigos; i++)
+            {
+                var modelo = banco[random.Next(banco.Count)];
+                inimigos.Add(new Inimigo
+                {
+                    Nome = modelo.Nome,
+                    VidaMax = modelo.VidaMax,
+                    VidaAtual = modelo.VidaAtual,
+                    Dano = modelo.Dano,
+                    CaminhoImagem = modelo.CaminhoImagem
+                });
+            }
+
+            CriarImagensInimigos();
+        }
 
     }
 }
