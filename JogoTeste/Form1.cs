@@ -34,10 +34,12 @@ namespace JogoTeste
             new Dictionary<int, List<Inimigo>>();
         List<Inimigo> inimigos = new List<Inimigo>();
         private List<PictureBox> imagensInimigos = new List<PictureBox>();
+        private PictureBox? inimigoSelecionadoPB = null;
         int inimigoSelecionadoIndice;
         bool inimigoSelecionado;
         bool inimigoSelecionadoClicado;
-
+        private const int TAMANHO_NORMAL = 100; //mude isso pra mudar o tamanho dos inimigos quando você passa o mouse
+        private const int TAMANHO_HOVER = 110;
         public class Player
         {
             public int VidaMax;
@@ -274,6 +276,7 @@ namespace JogoTeste
         private void Inimigo_Click(object? sender, EventArgs e)
         {
             PictureBox pb = (PictureBox)sender;
+            inimigoSelecionadoPB = pb;
             inimigoSelecionadoIndice = (int)pb.Tag;
             inimigoSelecionado = true;
             inimigoSelecionadoClicado = true;
@@ -284,20 +287,42 @@ namespace JogoTeste
         private void Inimigo_MouseEnter(object? sender, EventArgs e)
         {
             PictureBox pb = (PictureBox)sender;
+            
+            if (inimigoSelecionadoPB != null && inimigoSelecionadoPB != pb && inimigoSelecionadoIndice != (int)pb.Tag)
+            {
+                DefinirTamanho(pb, TAMANHO_NORMAL);
+            }
+            inimigoSelecionadoPB = pb;
+            
             inimigoSelecionadoIndice = (int)pb.Tag;
             inimigoSelecionado = true;
-            inimigoSelecionadoClicado = false;
+            if (!inimigoSelecionadoClicado)
+            {
+                DefinirTamanho(pb, TAMANHO_HOVER);
+            }
+
             MostrarVidaInimigo();
         }
 
         private void Inimigo_MouseLeave(object? sender, EventArgs e)
         {
+            PictureBox pb = (PictureBox)sender;
             if (!inimigoSelecionadoClicado)
             {
                 labelNomeInimigo.Visible = false;
                 panelFundoVidaInimigo.Visible = false;
                 inimigoSelecionado = false;
+                DefinirTamanho(pb, TAMANHO_NORMAL);
             }
+            
+        }
+
+        private void DefinirTamanho(PictureBox pb, int tamanho)
+        {
+            pb.Width = tamanho; 
+            pb.Height = tamanho; 
+            pb.Left = pb.Left + (pb.Width - tamanho) / 2; 
+            pb.Top = pb.Top + (pb.Height - tamanho) / 2;
         }
 
         private void MostrarVidaInimigo()
@@ -352,6 +377,9 @@ namespace JogoTeste
 
             inimigoSelecionado = false;
             inimigoSelecionadoClicado = false;
+
+
+            DefinirTamanho(inimigoSelecionadoPB, TAMANHO_NORMAL);
         }
 
         // Funções de Combate do Player
