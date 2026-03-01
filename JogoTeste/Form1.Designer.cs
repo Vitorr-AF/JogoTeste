@@ -35,7 +35,17 @@
             panelJogo1 = new Panel();
             panelCentroJogo1 = new Panel();
             panelEnemies = new Panel();
+            panelStatusMenu = new Panel();
+            labelDanoAtaque = new Label();
+            labelTaxaAcerto = new Label();
+            trackTaxaAcerto = new TrackBar();
+            btnVoltar3 = new Button();
+            panelItemsMenu = new Panel();
+            btnVoltar2 = new Button();
+            panelSkillsMenu = new Panel();
+            btnVoltar1 = new Button();
             panelControls = new Panel();
+            labelMensagens = new Label();
             labelNomeInimigo = new Label();
             panelFundoVidaInimigo = new Panel();
             panelFrenteVidaInimigo = new Panel();
@@ -50,17 +60,14 @@
             btnItems = new Button();
             btnSkills = new Button();
             btnAttack = new Button();
-            panelStatusMenu = new Panel();
-            btnVoltar3 = new Button();
-            panelItemsMenu = new Panel();
-            btnVoltar2 = new Button();
-            panelSkillsMenu = new Panel();
-            btnVoltar1 = new Button();
-            labelMensagens = new Label();
             panelMenu.SuspendLayout();
             panelCentroMenu.SuspendLayout();
             panelJogo1.SuspendLayout();
             panelCentroJogo1.SuspendLayout();
+            panelStatusMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)trackTaxaAcerto).BeginInit();
+            panelItemsMenu.SuspendLayout();
+            panelSkillsMenu.SuspendLayout();
             panelControls.SuspendLayout();
             panelFundoVidaInimigo.SuspendLayout();
             panelFrenteVidaInimigo.SuspendLayout();
@@ -68,9 +75,6 @@
             panelFrenteEnergia.SuspendLayout();
             panelFundoVida.SuspendLayout();
             panelFrenteVida.SuspendLayout();
-            panelStatusMenu.SuspendLayout();
-            panelItemsMenu.SuspendLayout();
-            panelSkillsMenu.SuspendLayout();
             SuspendLayout();
             // 
             // panelMenu
@@ -125,10 +129,10 @@
             // panelCentroJogo1
             // 
             panelCentroJogo1.Controls.Add(panelEnemies);
-            panelCentroJogo1.Controls.Add(panelControls);
             panelCentroJogo1.Controls.Add(panelStatusMenu);
             panelCentroJogo1.Controls.Add(panelItemsMenu);
             panelCentroJogo1.Controls.Add(panelSkillsMenu);
+            panelCentroJogo1.Controls.Add(panelControls);
             panelCentroJogo1.Location = new Point(0, 0);
             panelCentroJogo1.Name = "panelCentroJogo1";
             panelCentroJogo1.Size = new Size(800, 450);
@@ -140,6 +144,94 @@
             panelEnemies.Name = "panelEnemies";
             panelEnemies.Size = new Size(770, 238);
             panelEnemies.TabIndex = 3;
+            // 
+            // panelStatusMenu
+            // 
+            panelStatusMenu.Controls.Add(labelDanoAtaque);
+            panelStatusMenu.Controls.Add(labelTaxaAcerto);
+            panelStatusMenu.Controls.Add(trackTaxaAcerto);
+            panelStatusMenu.Controls.Add(btnVoltar3);
+            panelStatusMenu.Location = new Point(7, 262);
+            panelStatusMenu.Name = "panelStatusMenu";
+            panelStatusMenu.Size = new Size(773, 176);
+            panelStatusMenu.TabIndex = 6;
+            panelStatusMenu.Visible = false;
+            // 
+            // labelDanoAtaque
+            // 
+            labelDanoAtaque.AutoSize = true;
+            labelDanoAtaque.Location = new Point(31, 86);
+            labelDanoAtaque.Name = "labelDanoAtaque";
+            labelDanoAtaque.Size = new Size(120, 15);
+            labelDanoAtaque.TabIndex = 3;
+            labelDanoAtaque.Text = "20 de dano de ataque";
+            // 
+            // labelTaxaAcerto
+            // 
+            labelTaxaAcerto.AutoSize = true;
+            labelTaxaAcerto.Location = new Point(31, 110);
+            labelTaxaAcerto.Name = "labelTaxaAcerto";
+            labelTaxaAcerto.Size = new Size(127, 15);
+            labelTaxaAcerto.TabIndex = 2;
+            labelTaxaAcerto.Text = "100% de taxa de acerto";
+            // 
+            // trackTaxaAcerto
+            // 
+            trackTaxaAcerto.Location = new Point(31, 128);
+            trackTaxaAcerto.Maximum = 100;
+            trackTaxaAcerto.Name = "trackTaxaAcerto";
+            trackTaxaAcerto.Size = new Size(205, 45);
+            trackTaxaAcerto.TabIndex = 1;
+            trackTaxaAcerto.Value = 100;
+            trackTaxaAcerto.Scroll += trackTaxaAcerto_Scroll;
+            // 
+            // btnVoltar3
+            // 
+            btnVoltar3.Location = new Point(698, 153);
+            btnVoltar3.Name = "btnVoltar3";
+            btnVoltar3.Size = new Size(75, 23);
+            btnVoltar3.TabIndex = 0;
+            btnVoltar3.Text = "Voltar";
+            btnVoltar3.UseVisualStyleBackColor = true;
+            btnVoltar3.Click += btnVoltar3_Click;
+            // 
+            // panelItemsMenu
+            // 
+            panelItemsMenu.Controls.Add(btnVoltar2);
+            panelItemsMenu.Location = new Point(9, 259);
+            panelItemsMenu.Name = "panelItemsMenu";
+            panelItemsMenu.Size = new Size(773, 176);
+            panelItemsMenu.TabIndex = 5;
+            panelItemsMenu.Visible = false;
+            // 
+            // btnVoltar2
+            // 
+            btnVoltar2.Location = new Point(698, 153);
+            btnVoltar2.Name = "btnVoltar2";
+            btnVoltar2.Size = new Size(75, 23);
+            btnVoltar2.TabIndex = 0;
+            btnVoltar2.Text = "Voltar";
+            btnVoltar2.UseVisualStyleBackColor = true;
+            btnVoltar2.Click += btnVoltar2_Click;
+            // 
+            // panelSkillsMenu
+            // 
+            panelSkillsMenu.Controls.Add(btnVoltar1);
+            panelSkillsMenu.Location = new Point(12, 259);
+            panelSkillsMenu.Name = "panelSkillsMenu";
+            panelSkillsMenu.Size = new Size(773, 176);
+            panelSkillsMenu.TabIndex = 4;
+            panelSkillsMenu.Visible = false;
+            // 
+            // btnVoltar1
+            // 
+            btnVoltar1.Location = new Point(698, 153);
+            btnVoltar1.Name = "btnVoltar1";
+            btnVoltar1.Size = new Size(75, 23);
+            btnVoltar1.TabIndex = 0;
+            btnVoltar1.Text = "Voltar";
+            btnVoltar1.UseVisualStyleBackColor = true;
+            btnVoltar1.Click += btnVoltar1_Click;
             // 
             // panelControls
             // 
@@ -156,6 +248,14 @@
             panelControls.Name = "panelControls";
             panelControls.Size = new Size(773, 176);
             panelControls.TabIndex = 2;
+            // 
+            // labelMensagens
+            // 
+            labelMensagens.AutoSize = true;
+            labelMensagens.Location = new Point(-2, 161);
+            labelMensagens.Name = "labelMensagens";
+            labelMensagens.Size = new Size(0, 15);
+            labelMensagens.TabIndex = 9;
             // 
             // labelNomeInimigo
             // 
@@ -294,71 +394,6 @@
             btnAttack.UseVisualStyleBackColor = true;
             btnAttack.Click += btnAttack_Click;
             // 
-            // panelStatusMenu
-            // 
-            panelStatusMenu.Controls.Add(btnVoltar3);
-            panelStatusMenu.Location = new Point(7, 262);
-            panelStatusMenu.Name = "panelStatusMenu";
-            panelStatusMenu.Size = new Size(773, 176);
-            panelStatusMenu.TabIndex = 6;
-            panelStatusMenu.Visible = false;
-            // 
-            // btnVoltar3
-            // 
-            btnVoltar3.Location = new Point(698, 153);
-            btnVoltar3.Name = "btnVoltar3";
-            btnVoltar3.Size = new Size(75, 23);
-            btnVoltar3.TabIndex = 0;
-            btnVoltar3.Text = "Voltar";
-            btnVoltar3.UseVisualStyleBackColor = true;
-            btnVoltar3.Click += btnVoltar3_Click;
-            // 
-            // panelItemsMenu
-            // 
-            panelItemsMenu.Controls.Add(btnVoltar2);
-            panelItemsMenu.Location = new Point(9, 259);
-            panelItemsMenu.Name = "panelItemsMenu";
-            panelItemsMenu.Size = new Size(773, 176);
-            panelItemsMenu.TabIndex = 5;
-            panelItemsMenu.Visible = false;
-            // 
-            // btnVoltar2
-            // 
-            btnVoltar2.Location = new Point(698, 153);
-            btnVoltar2.Name = "btnVoltar2";
-            btnVoltar2.Size = new Size(75, 23);
-            btnVoltar2.TabIndex = 0;
-            btnVoltar2.Text = "Voltar";
-            btnVoltar2.UseVisualStyleBackColor = true;
-            btnVoltar2.Click += btnVoltar2_Click;
-            // 
-            // panelSkillsMenu
-            // 
-            panelSkillsMenu.Controls.Add(btnVoltar1);
-            panelSkillsMenu.Location = new Point(12, 259);
-            panelSkillsMenu.Name = "panelSkillsMenu";
-            panelSkillsMenu.Size = new Size(773, 176);
-            panelSkillsMenu.TabIndex = 4;
-            panelSkillsMenu.Visible = false;
-            // 
-            // btnVoltar1
-            // 
-            btnVoltar1.Location = new Point(698, 153);
-            btnVoltar1.Name = "btnVoltar1";
-            btnVoltar1.Size = new Size(75, 23);
-            btnVoltar1.TabIndex = 0;
-            btnVoltar1.Text = "Voltar";
-            btnVoltar1.UseVisualStyleBackColor = true;
-            btnVoltar1.Click += btnVoltar1_Click;
-            // 
-            // labelMensagens
-            // 
-            labelMensagens.AutoSize = true;
-            labelMensagens.Location = new Point(-2, 161);
-            labelMensagens.Name = "labelMensagens";
-            labelMensagens.Size = new Size(0, 15);
-            labelMensagens.TabIndex = 9;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -375,6 +410,11 @@
             panelCentroMenu.ResumeLayout(false);
             panelJogo1.ResumeLayout(false);
             panelCentroJogo1.ResumeLayout(false);
+            panelStatusMenu.ResumeLayout(false);
+            panelStatusMenu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)trackTaxaAcerto).EndInit();
+            panelItemsMenu.ResumeLayout(false);
+            panelSkillsMenu.ResumeLayout(false);
             panelControls.ResumeLayout(false);
             panelControls.PerformLayout();
             panelFundoVidaInimigo.ResumeLayout(false);
@@ -386,9 +426,6 @@
             panelFundoVida.ResumeLayout(false);
             panelFrenteVida.ResumeLayout(false);
             panelFrenteVida.PerformLayout();
-            panelStatusMenu.ResumeLayout(false);
-            panelItemsMenu.ResumeLayout(false);
-            panelSkillsMenu.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -423,5 +460,8 @@
         private Label labelVidaInimigo;
         private Label labelNomeInimigo;
         private Label labelMensagens;
+        private TrackBar trackTaxaAcerto;
+        private Label labelTaxaAcerto;
+        private Label labelDanoAtaque;
     }
 }

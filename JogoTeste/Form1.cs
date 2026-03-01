@@ -76,7 +76,7 @@ namespace JogoTeste
                 VidaAtual = 100,
                 EnergiaMax = 100,
                 EnergiaAtual = 100,
-                DanoAtaque = 100,
+                DanoAtaque = 20,
                 TaxaAcerto = 100,
             };
             AtualizarRecursos();
@@ -121,7 +121,7 @@ namespace JogoTeste
 
             int larguraVida = (int)((player.VidaAtual / (float)player.VidaMax) * panelFundoVida.Width);
             int larguraEnergia = (int)((player.EnergiaAtual / (float)player.EnergiaMax) * panelFundoEnergia.Width);
-            
+
 
             panelFrenteVida.Width = larguraVida;
             panelFrenteEnergia.Width = larguraEnergia;
@@ -182,7 +182,7 @@ namespace JogoTeste
             {
                 ExibirMensagem("Ataque errou!!!");
             }
-            
+
         }
 
         private void ExibirMensagem(String mensagem)
@@ -204,6 +204,29 @@ namespace JogoTeste
             Inimigo inimigo = inimigos[inimigoSelecionadoIndice];
             inimigo.VidaAtual -= dano;
             AtualizarRecursosInimigo();
+        }
+        
+        private void trackTaxaAcerto_Scroll(object sender, EventArgs e)
+        {
+            float multiplicadorDeDano = 1.15f;
+            float taxaBase = 100f;
+            float danoBase = 20f;
+
+            player.TaxaAcerto = trackTaxaAcerto.Value;
+
+            float taxaCalculo = Math.Max(player.TaxaAcerto, 10f);
+
+            float multiplicador = (float)Math.Pow(
+                taxaBase / (float)taxaCalculo, 
+                multiplicadorDeDano
+                );
+
+            player.DanoAtaque = (int)Math.Round(danoBase * multiplicador);
+
+            labelTaxaAcerto.Text = $"{player.TaxaAcerto}% de taxa de acerto";
+            labelDanoAtaque.Text = $"{player.DanoAtaque} de dano de ataque";
+
+
         }
 
 
@@ -275,7 +298,7 @@ namespace JogoTeste
             Inimigo inimigo = inimigos[inimigoSelecionadoIndice];
 
             labelVidaInimigo.Text = $"{inimigo.VidaAtual}/{inimigo.VidaMax}";
-            
+
             labelVidaInimigo.Visible = true;
         }
 
@@ -308,5 +331,6 @@ namespace JogoTeste
 
             CriarImagensInimigos();
         }
+
     }
 }
