@@ -197,6 +197,12 @@ namespace JogoTeste
 
         private void btnAttack_Click(object sender, EventArgs e)
         {
+            if (!inimigoSelecionado)
+            {
+                ExibirMensagem("Selecione um inimigo para atacar");
+                return;
+            }
+            ExibirMensagem("");
             Inimigo inimigo = inimigos[inimigoSelecionadoIndice];
             int numeroAcerto = random.Next(1, 101);
 
@@ -326,6 +332,7 @@ namespace JogoTeste
             {
                 labelNomeInimigo.Visible = false;
                 panelFundoVidaInimigo.Visible = false;
+                inimigoSelecionado = false;
             }
         }
 
@@ -389,7 +396,7 @@ namespace JogoTeste
             LimparInimigos();
 
             int quantidadeInimigos = random.Next(1, dificuldade + 2); // Aparentemente o random.next exclui o valor max
-            // A linha embaixo dessa é mudar diretamente a quantidade, por padrão é pra deixar comentada
+            // A linha embaixo dessa é pra mudar diretamente a quantidade, por padrão é pra deixar comentada
             //int quantidadeInimigos = 6;
             var banco = InimigosPorNivel[dificuldade];
             for (int i = 0; i < quantidadeInimigos; i++)
