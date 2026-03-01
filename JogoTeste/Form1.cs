@@ -224,42 +224,6 @@ namespace JogoTeste
         }
 
 
-        // Funções de Combate do Player
-        private void DanoAoPlayer(int dano)
-        {
-            player.VidaAtual -= dano;
-            AtualizarRecursos();
-        }
-
-        private void DanoAoInimigo(int dano)
-        {
-            Inimigo inimigo = inimigos[inimigoSelecionadoIndice];
-            inimigo.VidaAtual -= dano;
-            AtualizarRecursosInimigo();
-        }
-
-        private void trackTaxaAcerto_Scroll(object sender, EventArgs e)
-        {
-            float multiplicadorDeDano = 1.15f;
-            float taxaBase = 100f;
-            float danoBase = 20f;
-
-            player.TaxaAcerto = trackTaxaAcerto.Value;
-
-            float taxaCalculo = Math.Max(player.TaxaAcerto, 10f);
-
-            float multiplicador = (float)Math.Pow(
-                taxaBase / (float)taxaCalculo,
-                multiplicadorDeDano
-                );
-
-            player.DanoAtaque = (int)Math.Round(danoBase * multiplicador);
-
-            labelTaxaAcerto.Text = $"{player.TaxaAcerto}% de taxa de acerto";
-            labelDanoAtaque.Text = $"{player.DanoAtaque} de dano de ataque";
-
-
-        }
 
 
         // Funções dos inimigos (visual)
@@ -388,6 +352,51 @@ namespace JogoTeste
 
             inimigoSelecionado = false;
             inimigoSelecionadoClicado = false;
+        }
+
+        // Funções de Combate do Player
+        private void DanoAoPlayer(int dano)
+        {
+            player.VidaAtual -= dano;
+            if (player.VidaAtual < 0)
+            {
+                player.VidaAtual = 0;
+            }
+            AtualizarRecursos();
+        }
+
+        private void DanoAoInimigo(int dano)
+        {
+            Inimigo inimigo = inimigos[inimigoSelecionadoIndice];
+            inimigo.VidaAtual -= dano;
+            if (inimigo.VidaAtual < 0)
+            {
+                inimigo.VidaAtual = 0;
+            }
+            AtualizarRecursosInimigo();
+        }
+
+        private void trackTaxaAcerto_Scroll(object sender, EventArgs e)
+        {
+            float multiplicadorDeDano = 1.15f;
+            float taxaBase = 100f;
+            float danoBase = 20f;
+
+            player.TaxaAcerto = trackTaxaAcerto.Value;
+
+            float taxaCalculo = Math.Max(player.TaxaAcerto, 10f);
+
+            float multiplicador = (float)Math.Pow(
+                taxaBase / (float)taxaCalculo,
+                multiplicadorDeDano
+                );
+
+            player.DanoAtaque = (int)Math.Round(danoBase * multiplicador);
+
+            labelTaxaAcerto.Text = $"{player.TaxaAcerto}% de taxa de acerto";
+            labelDanoAtaque.Text = $"{player.DanoAtaque} de dano de ataque";
+
+
         }
 
         // Funções dos inimigos (mecânica)
