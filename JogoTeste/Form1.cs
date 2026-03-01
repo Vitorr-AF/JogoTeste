@@ -107,6 +107,30 @@ namespace JogoTeste
         {
             labelEnergia.Visible = false;
         }
+        
+        private void panelFundoEnergia_MouseEnter(object sender, EventArgs e)
+        {
+            labelEnergia.Text = $"{player.EnergiaAtual}/{player.EnergiaMax}";
+
+            labelEnergia.Visible = true;
+        }
+
+        private void panelFundoEnergia_MouseLeave(object sender, EventArgs e)
+        {
+            labelEnergia.Visible = false;
+        }
+
+        private void panelFundoVida_MouseEnter(object sender, EventArgs e)
+        {
+            labelVida.Text = $"{player.VidaAtual}/{player.VidaMax}";
+
+            labelVida.Visible = true;
+        }
+
+        private void panelFundoVida_MouseLeave(object sender, EventArgs e)
+        {
+            labelVida.Visible = false;
+        }
 
         private void AtualizarRecursos()
         {
@@ -205,7 +229,7 @@ namespace JogoTeste
             inimigo.VidaAtual -= dano;
             AtualizarRecursosInimigo();
         }
-        
+
         private void trackTaxaAcerto_Scroll(object sender, EventArgs e)
         {
             float multiplicadorDeDano = 1.15f;
@@ -217,7 +241,7 @@ namespace JogoTeste
             float taxaCalculo = Math.Max(player.TaxaAcerto, 10f);
 
             float multiplicador = (float)Math.Pow(
-                taxaBase / (float)taxaCalculo, 
+                taxaBase / (float)taxaCalculo,
                 multiplicadorDeDano
                 );
 
@@ -284,6 +308,7 @@ namespace JogoTeste
             labelNomeInimigo.Visible = true;
 
             panelFundoVidaInimigo.Visible = true;
+            VoltarMenuControles();
         }
 
         private void LimparInimigos()
@@ -303,6 +328,20 @@ namespace JogoTeste
         }
 
         private void panelFrenteVidaInimigo_MouseLeave(object sender, EventArgs e)
+        {
+            labelVidaInimigo.Visible = false;
+        }
+
+        private void panelFundoVidaInimigo_MouseEnter(object sender, EventArgs e)
+        {
+            Inimigo inimigo = inimigos[inimigoSelecionadoIndice];
+
+            labelVidaInimigo.Text = $"{inimigo.VidaAtual}/{inimigo.VidaMax}";
+
+            labelVidaInimigo.Visible = true;
+        }
+
+        private void panelFundoVidaInimigo_MouseLeave(object sender, EventArgs e)
         {
             labelVidaInimigo.Visible = false;
         }
