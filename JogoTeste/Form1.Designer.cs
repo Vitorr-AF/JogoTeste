@@ -142,6 +142,7 @@
             panelEnemies.Name = "panelEnemies";
             panelEnemies.Size = new Size(770, 238);
             panelEnemies.TabIndex = 3;
+            panelEnemies.Click += panelEnemies_Click;
             // 
             // panelControls
             // 
@@ -199,7 +200,7 @@
             // labelMensagens
             // 
             labelMensagens.AutoSize = true;
-            labelMensagens.Location = new Point(-2, 161);
+            labelMensagens.Location = new Point(244, 142);
             labelMensagens.Name = "labelMensagens";
             labelMensagens.Size = new Size(0, 15);
             labelMensagens.TabIndex = 9;

@@ -35,6 +35,8 @@ namespace JogoTeste
         List<Inimigo> inimigos = new List<Inimigo>();
         private List<PictureBox> imagensInimigos = new List<PictureBox>();
         int inimigoSelecionadoIndice;
+        bool inimigoSelecionado;
+        bool inimigoSelecionadoClicado;
 
         public class Player
         {
@@ -107,7 +109,7 @@ namespace JogoTeste
         {
             labelEnergia.Visible = false;
         }
-        
+
         private void panelFundoEnergia_MouseEnter(object sender, EventArgs e)
         {
             labelEnergia.Text = $"{player.EnergiaAtual}/{player.EnergiaMax}";
@@ -283,6 +285,8 @@ namespace JogoTeste
 
                 pb.Tag = i;
                 pb.Click += Inimigo_Click;
+                pb.MouseEnter += Inimigo_MouseEnter;
+                pb.MouseLeave += Inimigo_MouseLeave;
 
                 panelEnemies.Controls.Add(pb);
                 imagensInimigos.Add(pb);
@@ -301,14 +305,38 @@ namespace JogoTeste
         {
             PictureBox pb = (PictureBox)sender;
             inimigoSelecionadoIndice = (int)pb.Tag;
+            inimigoSelecionado = true;
+            inimigoSelecionadoClicado = true;
+            MostrarVidaInimigo();
+            VoltarMenuControles();
+        }
+
+        private void Inimigo_MouseEnter(object? sender, EventArgs e)
+        {
+            PictureBox pb = (PictureBox)sender;
+            inimigoSelecionadoIndice = (int)pb.Tag;
+            inimigoSelecionado = true;
+            inimigoSelecionadoClicado = false;
+            MostrarVidaInimigo();
+        }
+
+        private void Inimigo_MouseLeave(object? sender, EventArgs e)
+        {
+            if (!inimigoSelecionadoClicado)
+            {
+                labelNomeInimigo.Visible = false;
+                panelFundoVidaInimigo.Visible = false;
+            }
+        }
+
+        private void MostrarVidaInimigo()
+        {
             labelNomeInimigo.Text = $"{inimigos[inimigoSelecionadoIndice].Nome}:";
 
             AtualizarRecursosInimigo();
 
             labelNomeInimigo.Visible = true;
-
             panelFundoVidaInimigo.Visible = true;
-            VoltarMenuControles();
         }
 
         private void LimparInimigos()
@@ -344,6 +372,15 @@ namespace JogoTeste
         private void panelFundoVidaInimigo_MouseLeave(object sender, EventArgs e)
         {
             labelVidaInimigo.Visible = false;
+        }
+
+        private void panelEnemies_Click(object sender, EventArgs e)
+        {
+            labelNomeInimigo.Visible = false;
+            panelFundoVidaInimigo.Visible = false;
+
+            inimigoSelecionado = false;
+            inimigoSelecionadoClicado = false;
         }
 
         // Funções dos inimigos (mecânica)
