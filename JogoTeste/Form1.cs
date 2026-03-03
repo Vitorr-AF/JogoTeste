@@ -290,7 +290,9 @@ namespace JogoTeste
             
             if (inimigoSelecionadoPB != null && inimigoSelecionadoPB != pb && inimigoSelecionadoIndice != (int)pb.Tag)
             {
-                DefinirTamanho(pb, TAMANHO_NORMAL);
+                DefinirTamanho(inimigoSelecionadoPB, TAMANHO_NORMAL);
+                DefinirTamanho(pb, TAMANHO_HOVER);
+                inimigoSelecionadoClicado = false;
             }
             inimigoSelecionadoPB = pb;
             
