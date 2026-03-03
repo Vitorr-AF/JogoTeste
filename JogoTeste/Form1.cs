@@ -321,10 +321,13 @@ namespace JogoTeste
 
         private void DefinirTamanho(PictureBox pb, int tamanho)
         {
-            pb.Width = tamanho; 
-            pb.Height = tamanho; 
             pb.Left = pb.Left + (pb.Width - tamanho) / 2; 
             pb.Top = pb.Top + (pb.Height - tamanho) / 2;
+            
+            pb.Width = tamanho; 
+            pb.Height = tamanho; 
+            // labelDebug.Visible = true
+            // labelDebug.Text = $"Left: {pb.Left} Largura: {pb.Width}\nTop: {pb.Top} Altura: {pb.Height}";
         }
 
         private void MostrarVidaInimigo()

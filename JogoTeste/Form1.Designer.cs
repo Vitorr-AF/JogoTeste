@@ -36,6 +36,7 @@
             panelCentroJogo1 = new Panel();
             panelEnemies = new Panel();
             panelControls = new Panel();
+            labelDebug = new Label();
             labelVidaInimigo = new Label();
             labelVida = new Label();
             labelEnergia = new Label();
@@ -61,12 +62,10 @@
             btnVoltar2 = new Button();
             panelSkillsMenu = new Panel();
             btnVoltar1 = new Button();
-            labelDebug = new Label();
             panelMenu.SuspendLayout();
             panelCentroMenu.SuspendLayout();
             panelJogo1.SuspendLayout();
             panelCentroJogo1.SuspendLayout();
-            panelEnemies.SuspendLayout();
             panelControls.SuspendLayout();
             panelFundoVidaInimigo.SuspendLayout();
             panelFundoEnergia.SuspendLayout();
@@ -140,7 +139,6 @@
             // 
             // panelEnemies
             // 
-            panelEnemies.Controls.Add(labelDebug);
             panelEnemies.Location = new Point(15, 15);
             panelEnemies.Name = "panelEnemies";
             panelEnemies.Size = new Size(770, 238);
@@ -149,6 +147,7 @@
             // 
             // panelControls
             // 
+            panelControls.Controls.Add(labelDebug);
             panelControls.Controls.Add(labelVidaInimigo);
             panelControls.Controls.Add(labelVida);
             panelControls.Controls.Add(labelEnergia);
@@ -166,6 +165,16 @@
             panelControls.Name = "panelControls";
             panelControls.Size = new Size(773, 188);
             panelControls.TabIndex = 2;
+            // 
+            // labelDebug
+            // 
+            labelDebug.AutoSize = true;
+            labelDebug.Location = new Point(390, 89);
+            labelDebug.Name = "labelDebug";
+            labelDebug.Size = new Size(69, 15);
+            labelDebug.TabIndex = 0;
+            labelDebug.Text = "label debug";
+            labelDebug.Visible = false;
             // 
             // labelVidaInimigo
             // 
@@ -416,16 +425,6 @@
             btnVoltar1.UseVisualStyleBackColor = true;
             btnVoltar1.Click += btnVoltar1_Click;
             // 
-            // labelDebug
-            // 
-            labelDebug.AutoSize = true;
-            labelDebug.Location = new Point(434, 204);
-            labelDebug.Name = "labelDebug";
-            labelDebug.Size = new Size(69, 15);
-            labelDebug.TabIndex = 0;
-            labelDebug.Text = "label debug";
-            labelDebug.Visible = false;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -442,8 +441,6 @@
             panelCentroMenu.ResumeLayout(false);
             panelJogo1.ResumeLayout(false);
             panelCentroJogo1.ResumeLayout(false);
-            panelEnemies.ResumeLayout(false);
-            panelEnemies.PerformLayout();
             panelControls.ResumeLayout(false);
             panelControls.PerformLayout();
             panelFundoVidaInimigo.ResumeLayout(false);
