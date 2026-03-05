@@ -56,6 +56,7 @@ namespace JogoTeste
             public int VidaAtual { get; set; }
             public int Dano { get; set; }
             public string CaminhoImagem { get; set; }
+            public bool Vivo {  get; set; }
         }
 
         // Botões do Menu de Inicio, e suas funções
@@ -204,8 +205,13 @@ namespace JogoTeste
                 ExibirMensagem("Selecione um inimigo para atacar");
                 return;
             }
-            ExibirMensagem("");
             Inimigo inimigo = inimigos[inimigoSelecionadoIndice];
+            if (!inimigo.Vivo)
+            {
+                ExibirMensagem("Selecione um inimigo que ainda não esteja morto");
+                return;
+            }
+            ExibirMensagem("");
             int numeroAcerto = random.Next(1, 101);
 
             if (numeroAcerto <= player.TaxaAcerto)
@@ -265,13 +271,6 @@ namespace JogoTeste
             }
         }
 
-        private void AtualizarRecursosInimigo()
-        {
-            Inimigo inimigo = inimigos[inimigoSelecionadoIndice];
-
-            int larguraVidaInimigo = (int)((inimigo.VidaAtual / (float)inimigo.VidaMax) * panelFundoVidaInimigo.Width);
-            panelFrenteVidaInimigo.Width = larguraVidaInimigo;
-        }
 
         private void Inimigo_Click(object? sender, EventArgs e)
         {
@@ -398,16 +397,6 @@ namespace JogoTeste
             AtualizarRecursos();
         }
 
-        private void DanoAoInimigo(int dano)
-        {
-            Inimigo inimigo = inimigos[inimigoSelecionadoIndice];
-            inimigo.VidaAtual -= dano;
-            if (inimigo.VidaAtual < 0)
-            {
-                inimigo.VidaAtual = 0;
-            }
-            AtualizarRecursosInimigo();
-        }
 
         private void trackTaxaAcerto_Scroll(object sender, EventArgs e)
         {
@@ -450,12 +439,32 @@ namespace JogoTeste
                     VidaMax = modelo.VidaMax,
                     VidaAtual = modelo.VidaMax,
                     Dano = modelo.Dano,
-                    CaminhoImagem = modelo.CaminhoImagem
+                    CaminhoImagem = modelo.CaminhoImagem,
+                    Vivo = true
                 });
             }
 
             CriarImagensInimigos();
         }
+        private void AtualizarRecursosInimigo()
+        {
+            Inimigo inimigo = inimigos[inimigoSelecionadoIndice];
 
+            int larguraVidaInimigo = (int)((inimigo.VidaAtual / (float)inimigo.VidaMax) * panelFundoVidaInimigo.Width);
+            panelFrenteVidaInimigo.Width = larguraVidaInimigo;
+        }
+
+        private void DanoAoInimigo(int dano)
+        {
+            Inimigo inimigo = inimigos[inimigoSelecionadoIndice];
+            inimigo.VidaAtual -= dano;
+            if (inimigo.VidaAtual <= 0)
+            {
+                inimigo.VidaAtual = 0;
+                inimigo.Vivo = false;
+
+            }
+            AtualizarRecursosInimigo();
+        }
     }
 }
