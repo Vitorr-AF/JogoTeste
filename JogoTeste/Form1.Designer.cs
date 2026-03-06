@@ -62,6 +62,7 @@
             btnVoltar2 = new Button();
             panelSkillsMenu = new Panel();
             btnVoltar1 = new Button();
+            labelOndaNum = new Label();
             panelMenu.SuspendLayout();
             panelCentroMenu.SuspendLayout();
             panelJogo1.SuspendLayout();
@@ -147,6 +148,7 @@
             // 
             // panelControls
             // 
+            panelControls.Controls.Add(labelOndaNum);
             panelControls.Controls.Add(labelDebug);
             panelControls.Controls.Add(labelVidaInimigo);
             panelControls.Controls.Add(labelVida);
@@ -425,6 +427,15 @@
             btnVoltar1.UseVisualStyleBackColor = true;
             btnVoltar1.Click += btnVoltar1_Click;
             // 
+            // labelOndaNum
+            // 
+            labelOndaNum.AutoSize = true;
+            labelOndaNum.Location = new Point(693, 167);
+            labelOndaNum.Name = "labelOndaNum";
+            labelOndaNum.Size = new Size(45, 15);
+            labelOndaNum.TabIndex = 11;
+            labelOndaNum.Text = "Onda 1";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -490,5 +501,6 @@
         private Label labelDanoAtaque;
         private Panel panelPlayerImage;
         private Label labelDebug;
+        private Label labelOndaNum;
     }
 }

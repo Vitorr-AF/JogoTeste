@@ -40,6 +40,8 @@ namespace JogoTeste
         bool inimigoSelecionadoClicado;
         private const int TAMANHO_NORMAL = 100; //mude isso pra mudar o tamanho dos inimigos quando você passa o mouse
         private const int TAMANHO_HOVER = 110;
+        int dificuldadeAtual = 1;
+        int ondaAtual = 0;
         public class Player
         {
             public int VidaMax;
@@ -85,7 +87,7 @@ namespace JogoTeste
                 TaxaAcerto = 100,
             };
             AtualizarRecursos();
-            ProximaOnda(1);
+            ProximaOnda(dificuldadeAtual);
         }
 
         // Barra de Vida e de Energia, e suas funções
@@ -383,7 +385,11 @@ namespace JogoTeste
             inimigoSelecionadoClicado = false;
 
 
-            DefinirTamanho(inimigoSelecionadoPB, TAMANHO_NORMAL);
+            if(inimigoSelecionadoPB != null)
+            {
+                DefinirTamanho(inimigoSelecionadoPB, TAMANHO_NORMAL);
+
+            }
         }
 
         // Funções de Combate do Player
@@ -425,6 +431,12 @@ namespace JogoTeste
         private void ProximaOnda(int dificuldade)
         {
             LimparInimigos();
+            labelNomeInimigo.Visible = false;
+            panelFundoVidaInimigo.Visible = false;
+            inimigoSelecionadoIndice = -1;
+            inimigoSelecionadoPB = null;
+            inimigoSelecionado = false;
+            inimigoSelecionadoClicado = false;
 
             int quantidadeInimigos = random.Next(1, dificuldade + 2); // Aparentemente o random.next exclui o valor max
             // A linha embaixo dessa é pra mudar diretamente a quantidade, por padrão é pra deixar comentada
@@ -445,6 +457,8 @@ namespace JogoTeste
             }
 
             CriarImagensInimigos();
+            ondaAtual +=  1;
+            labelOndaNum.Text = $"Onda {ondaAtual}";
         }
         private void AtualizarRecursosInimigo()
         {
@@ -452,6 +466,9 @@ namespace JogoTeste
 
             int larguraVidaInimigo = (int)((inimigo.VidaAtual / (float)inimigo.VidaMax) * panelFundoVidaInimigo.Width);
             panelFrenteVidaInimigo.Width = larguraVidaInimigo;
+            if (inimigos.All(i => !i.Vivo)){
+                ProximaOnda(dificuldadeAtual);
+            }
         }
 
         private void DanoAoInimigo(int dano)
