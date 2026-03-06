@@ -4,6 +4,7 @@ using System.Text.Json;
 using static JogoTeste.Form1;
 using JogoTeste.Models;
 using JogoTeste.Utils;
+using JogoTeste.Services;
 
 namespace JogoTeste
 {
@@ -17,6 +18,7 @@ namespace JogoTeste
         }
 
         UIHelper uiHelper = new UIHelper();
+        CombatService combatService = new CombatService();
         // Funções de Centralização do form com tela cheia
         
 
@@ -34,7 +36,7 @@ namespace JogoTeste
         List<Inimigo> inimigos = new List<Inimigo>();
         private List<PictureBox> imagensInimigos = new List<PictureBox>();
         private PictureBox? inimigoSelecionadoPB = null;
-        int inimigoSelecionadoIndice;
+        int inimigoSelecionadoIndice = -1;
         bool inimigoSelecionado;
         bool inimigoSelecionadoClicado;
         private const int TAMANHO_NORMAL = 100; //mude isso pra mudar o tamanho dos inimigos quando você passa o mouse
@@ -172,7 +174,8 @@ namespace JogoTeste
 
             if (numeroAcerto <= player.TaxaAcerto)
             {
-                DanoAoInimigo(player.DanoAtaque);
+                combatService.DanoAoInimigo(inimigo, player.DanoAtaque);
+                AtualizarRecursos();
             }
             else
             {
@@ -326,7 +329,7 @@ namespace JogoTeste
         {
             labelNomeInimigo.Text = $"{inimigos[inimigoSelecionadoIndice].Nome}:";
 
-            AtualizarRecursosInimigo();
+            AtualizarRecursos();
 
             labelNomeInimigo.Visible = true;
             panelFundoVidaInimigo.Visible = true;
@@ -351,6 +354,19 @@ namespace JogoTeste
             {
                 panelFrenteVida.BackColor = Color.LimeGreen;
             }
+
+            if (inimigoSelecionadoIndice != -1 && inimigoSelecionadoIndice != null)
+            {
+                Inimigo inimigo = inimigos[inimigoSelecionadoIndice];
+                int larguraVidaInimigo = (int)((inimigo.VidaAtual / (float)inimigo.VidaMax) * panelFundoVidaInimigo.Width);
+                panelFrenteVidaInimigo.Width = larguraVidaInimigo;
+                if (inimigos.All(i => !i.Vivo))
+                {
+                    ProximaOnda(dificuldadeAtual);
+                }
+
+            }
+
 
             int larguraVida = (int)((player.VidaAtual / (float)player.VidaMax) * panelFundoVida.Width);
             int larguraEnergia = (int)((player.EnergiaAtual / (float)player.EnergiaMax) * panelFundoEnergia.Width);
@@ -393,22 +409,6 @@ namespace JogoTeste
 
         
 
-        
-
-        // Funções de Combate do Player
-        private void DanoAoPlayer(int dano)
-        {
-            player.VidaAtual -= dano;
-            if (player.VidaAtual < 0)
-            {
-                player.VidaAtual = 0;
-            }
-            AtualizarRecursos();
-        }
-
-
-        
-
         // Funções dos inimigos (mecânica)
         private void ProximaOnda(int dificuldade)
         {
@@ -447,28 +447,8 @@ namespace JogoTeste
                 dificuldadeAtual = 5;
             }
         }
-        private void AtualizarRecursosInimigo()
-        {
-            Inimigo inimigo = inimigos[inimigoSelecionadoIndice];
+        
 
-            int larguraVidaInimigo = (int)((inimigo.VidaAtual / (float)inimigo.VidaMax) * panelFundoVidaInimigo.Width);
-            panelFrenteVidaInimigo.Width = larguraVidaInimigo;
-            if (inimigos.All(i => !i.Vivo)){
-                ProximaOnda(dificuldadeAtual);
-            }
-        }
-
-        private void DanoAoInimigo(int dano)
-        {
-            Inimigo inimigo = inimigos[inimigoSelecionadoIndice];
-            inimigo.VidaAtual -= dano;
-            if (inimigo.VidaAtual <= 0)
-            {
-                inimigo.VidaAtual = 0;
-                inimigo.Vivo = false;
-
-            }
-            AtualizarRecursosInimigo();
-        }
+        
     }
 }
