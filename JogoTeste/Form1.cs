@@ -3,6 +3,7 @@ using System.IO;
 using System.Text.Json;
 using static JogoTeste.Form1;
 using JogoTeste.Models;
+using JogoTeste.Utils;
 
 namespace JogoTeste
 {
@@ -15,17 +16,14 @@ namespace JogoTeste
 
         }
 
+        UIHelper uiHelper = new UIHelper();
         // Funções de Centralização do form com tela cheia
-        private void Centralizar(Panel interno, Panel pai)
-        {
-            interno.Left = (pai.Width - interno.Width) / 2;
-            interno.Top = (pai.Height - interno.Height) / 2;
-        }
+        
 
         private void Form1_Resize(object sender, EventArgs e)
         {
-            Centralizar(panelCentroMenu, panelMenu);
-            Centralizar(panelCentroJogo1, panelJogo1);
+            uiHelper.Centralizar(panelCentroMenu, panelMenu);
+            uiHelper.Centralizar(panelCentroJogo1, panelJogo1);
         }
 
         // Definição das classes, objetos e variáveis
@@ -201,8 +199,8 @@ namespace JogoTeste
             
             if (inimigoSelecionadoPB != null && inimigoSelecionadoPB != pb && inimigoSelecionadoIndice != (int)pb.Tag)
             {
-                DefinirTamanho(inimigoSelecionadoPB, TAMANHO_NORMAL);
-                DefinirTamanho(pb, TAMANHO_HOVER);
+                uiHelper.DefinirTamanho(inimigoSelecionadoPB, TAMANHO_NORMAL);
+                uiHelper.DefinirTamanho(pb, TAMANHO_HOVER);
                 inimigoSelecionadoClicado = false;
             }
             inimigoSelecionadoPB = pb;
@@ -211,7 +209,7 @@ namespace JogoTeste
             inimigoSelecionado = true;
             if (!inimigoSelecionadoClicado)
             {
-                DefinirTamanho(pb, TAMANHO_HOVER);
+                uiHelper.DefinirTamanho(pb, TAMANHO_HOVER);
             }
 
             MostrarVidaInimigo();
@@ -224,7 +222,7 @@ namespace JogoTeste
                 labelNomeInimigo.Visible = false;
                 panelFundoVidaInimigo.Visible = false;
                 inimigoSelecionado = false;
-                DefinirTamanho(pb, TAMANHO_NORMAL);
+                uiHelper.DefinirTamanho(pb, TAMANHO_NORMAL);
             }
             
         }
@@ -267,7 +265,7 @@ namespace JogoTeste
 
             if (inimigoSelecionadoPB != null)
             {
-                DefinirTamanho(inimigoSelecionadoPB, TAMANHO_NORMAL);
+                uiHelper.DefinirTamanho(inimigoSelecionadoPB, TAMANHO_NORMAL);
 
             }
         }
@@ -334,16 +332,7 @@ namespace JogoTeste
             panelFundoVidaInimigo.Visible = true;
         }
 
-        private void DefinirTamanho(PictureBox pb, int tamanho)
-        {
-            pb.Left = pb.Left + (pb.Width - tamanho) / 2;
-            pb.Top = pb.Top + (pb.Height - tamanho) / 2;
-
-            pb.Width = tamanho;
-            pb.Height = tamanho;
-            // labelDebug.Visible = true
-            // labelDebug.Text = $"Left: {pb.Left} Largura: {pb.Width}\nTop: {pb.Top} Altura: {pb.Height}";
-        }
+        
 
         private void LimparInimigos()
         {
