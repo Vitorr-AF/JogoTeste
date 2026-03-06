@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text.Json;
 using static JogoTeste.Form1;
+using JogoTeste.Models;
 
 namespace JogoTeste
 {
@@ -42,24 +43,8 @@ namespace JogoTeste
         private const int TAMANHO_HOVER = 110;
         int dificuldadeAtual = 1;
         int ondaAtual = 0;
-        public class Player
-        {
-            public int VidaMax;
-            public int VidaAtual;
-            public int EnergiaMax;
-            public int EnergiaAtual;
-            public int DanoAtaque;
-            public int TaxaAcerto;
-        }
-        public class Inimigo
-        {
-            public string Nome { get; set; }
-            public int VidaMax { get; set; }
-            public int VidaAtual { get; set; }
-            public int Dano { get; set; }
-            public string CaminhoImagem { get; set; }
-            public bool Vivo {  get; set; }
-        }
+        
+        
 
         // Botões do Menu de Inicio, e suas funções
         private void btnStartGame_Click(object sender, EventArgs e)
@@ -138,34 +123,6 @@ namespace JogoTeste
         {
             labelVida.Visible = false;
         }
-
-        private void AtualizarRecursos()
-        {
-            if (player.VidaAtual < (player.VidaMax * 0.3))
-            {
-                panelFrenteVida.BackColor = Color.Red;
-            }
-            else
-            {
-                panelFrenteVida.BackColor = Color.LimeGreen;
-            }
-
-            int larguraVida = (int)((player.VidaAtual / (float)player.VidaMax) * panelFundoVida.Width);
-            int larguraEnergia = (int)((player.EnergiaAtual / (float)player.EnergiaMax) * panelFundoEnergia.Width);
-
-
-            panelFrenteVida.Width = larguraVida;
-            panelFrenteEnergia.Width = larguraEnergia;
-        }
-
-        //Botões de Voltar para o Menu de Jogo Principal
-        private void VoltarMenuControles()
-        {
-            panelSkillsMenu.Visible = false;
-            panelItemsMenu.Visible = false;
-            panelStatusMenu.Visible = false;
-            panelControls.Visible = true;
-        }
         private void btnVoltar1_Click(object sender, EventArgs e)
         {
             VoltarMenuControles();
@@ -181,7 +138,6 @@ namespace JogoTeste
             VoltarMenuControles();
         }
 
-        // Botões do Menu de Jogo Principal
         private void btnSkills_Click(object sender, EventArgs e)
         {
             panelControls.Visible = false;
@@ -227,52 +183,6 @@ namespace JogoTeste
 
         }
 
-        private void ExibirMensagem(String mensagem)
-        {
-            labelMensagens.Visible = true;
-            labelMensagens.Text = mensagem;
-        }
-
-
-
-
-        // Funções dos inimigos (visual)
-        private void CarregarInimigos()
-        {
-            string json = File.ReadAllText("inimigos.json");
-
-            InimigosPorNivel =
-                JsonSerializer.Deserialize<Dictionary<int, List<Inimigo>>>(json);
-        }
-        private void CriarImagensInimigos()
-        {
-            for (int i = 0; i < inimigos.Count; i++)
-            {
-                PictureBox pb = new PictureBox();
-                pb.Size = new Size(100, 100);
-                pb.SizeMode = PictureBoxSizeMode.StretchImage;
-                pb.Image = Image.FromFile(inimigos[i].CaminhoImagem);
-
-                pb.Left = 50 + (i * 120);
-                if (i % 2 == 0)
-                {
-                    pb.Top = random.Next(10, 54);
-                }
-                else
-                {
-                    pb.Top = random.Next(55, 100);
-                }
-
-                pb.Tag = i;
-                pb.Click += Inimigo_Click;
-                pb.MouseEnter += Inimigo_MouseEnter;
-                pb.MouseLeave += Inimigo_MouseLeave;
-
-                panelEnemies.Controls.Add(pb);
-                imagensInimigos.Add(pb);
-            }
-        }
-
 
         private void Inimigo_Click(object? sender, EventArgs e)
         {
@@ -306,7 +216,6 @@ namespace JogoTeste
 
             MostrarVidaInimigo();
         }
-
         private void Inimigo_MouseLeave(object? sender, EventArgs e)
         {
             PictureBox pb = (PictureBox)sender;
@@ -319,35 +228,6 @@ namespace JogoTeste
             }
             
         }
-
-        private void DefinirTamanho(PictureBox pb, int tamanho)
-        {
-            pb.Left = pb.Left + (pb.Width - tamanho) / 2; 
-            pb.Top = pb.Top + (pb.Height - tamanho) / 2;
-            
-            pb.Width = tamanho; 
-            pb.Height = tamanho; 
-            // labelDebug.Visible = true
-            // labelDebug.Text = $"Left: {pb.Left} Largura: {pb.Width}\nTop: {pb.Top} Altura: {pb.Height}";
-        }
-
-        private void MostrarVidaInimigo()
-        {
-            labelNomeInimigo.Text = $"{inimigos[inimigoSelecionadoIndice].Nome}:";
-
-            AtualizarRecursosInimigo();
-
-            labelNomeInimigo.Visible = true;
-            panelFundoVidaInimigo.Visible = true;
-        }
-
-        private void LimparInimigos()
-        {
-            inimigos.Clear();
-            imagensInimigos.Clear();
-            panelEnemies.Controls.Clear();
-        }
-
         private void panelFrenteVidaInimigo_MouseEnter(object sender, EventArgs e)
         {
             Inimigo inimigo = inimigos[inimigoSelecionadoIndice];
@@ -385,24 +265,12 @@ namespace JogoTeste
             inimigoSelecionadoClicado = false;
 
 
-            if(inimigoSelecionadoPB != null)
+            if (inimigoSelecionadoPB != null)
             {
                 DefinirTamanho(inimigoSelecionadoPB, TAMANHO_NORMAL);
 
             }
         }
-
-        // Funções de Combate do Player
-        private void DanoAoPlayer(int dano)
-        {
-            player.VidaAtual -= dano;
-            if (player.VidaAtual < 0)
-            {
-                player.VidaAtual = 0;
-            }
-            AtualizarRecursos();
-        }
-
 
         private void trackTaxaAcerto_Scroll(object sender, EventArgs e)
         {
@@ -426,6 +294,131 @@ namespace JogoTeste
 
 
         }
+
+        private void CriarImagensInimigos()
+        {
+            for (int i = 0; i < inimigos.Count; i++)
+            {
+                PictureBox pb = new PictureBox();
+                pb.Size = new Size(100, 100);
+                pb.SizeMode = PictureBoxSizeMode.StretchImage;
+                pb.Image = Image.FromFile(inimigos[i].CaminhoImagem);
+
+                pb.Left = 50 + (i * 120);
+                if (i % 2 == 0)
+                {
+                    pb.Top = random.Next(10, 54);
+                }
+                else
+                {
+                    pb.Top = random.Next(55, 100);
+                }
+
+                pb.Tag = i;
+                pb.Click += Inimigo_Click;
+                pb.MouseEnter += Inimigo_MouseEnter;
+                pb.MouseLeave += Inimigo_MouseLeave;
+
+                panelEnemies.Controls.Add(pb);
+                imagensInimigos.Add(pb);
+            }
+        }
+
+        private void MostrarVidaInimigo()
+        {
+            labelNomeInimigo.Text = $"{inimigos[inimigoSelecionadoIndice].Nome}:";
+
+            AtualizarRecursosInimigo();
+
+            labelNomeInimigo.Visible = true;
+            panelFundoVidaInimigo.Visible = true;
+        }
+
+        private void DefinirTamanho(PictureBox pb, int tamanho)
+        {
+            pb.Left = pb.Left + (pb.Width - tamanho) / 2;
+            pb.Top = pb.Top + (pb.Height - tamanho) / 2;
+
+            pb.Width = tamanho;
+            pb.Height = tamanho;
+            // labelDebug.Visible = true
+            // labelDebug.Text = $"Left: {pb.Left} Largura: {pb.Width}\nTop: {pb.Top} Altura: {pb.Height}";
+        }
+
+        private void LimparInimigos()
+        {
+            inimigos.Clear();
+            imagensInimigos.Clear();
+            panelEnemies.Controls.Clear();
+        }
+
+        private void AtualizarRecursos()
+        {
+            if (player.VidaAtual < (player.VidaMax * 0.3))
+            {
+                panelFrenteVida.BackColor = Color.Red;
+            }
+            else
+            {
+                panelFrenteVida.BackColor = Color.LimeGreen;
+            }
+
+            int larguraVida = (int)((player.VidaAtual / (float)player.VidaMax) * panelFundoVida.Width);
+            int larguraEnergia = (int)((player.EnergiaAtual / (float)player.EnergiaMax) * panelFundoEnergia.Width);
+
+
+            panelFrenteVida.Width = larguraVida;
+            panelFrenteEnergia.Width = larguraEnergia;
+        }
+
+        
+        private void VoltarMenuControles()
+        {
+            panelSkillsMenu.Visible = false;
+            panelItemsMenu.Visible = false;
+            panelStatusMenu.Visible = false;
+            panelControls.Visible = true;
+        }
+
+
+        private void ExibirMensagem(String mensagem)
+        {
+            labelMensagens.Visible = true;
+            labelMensagens.Text = mensagem;
+        }
+
+
+
+
+        
+        private void CarregarInimigos()
+        {
+            string json = File.ReadAllText("inimigos.json");
+
+            InimigosPorNivel =
+                JsonSerializer.Deserialize<Dictionary<int, List<Inimigo>>>(json);
+        }
+
+
+        
+
+        
+
+        
+
+        // Funções de Combate do Player
+        private void DanoAoPlayer(int dano)
+        {
+            player.VidaAtual -= dano;
+            if (player.VidaAtual < 0)
+            {
+                player.VidaAtual = 0;
+            }
+            AtualizarRecursos();
+        }
+
+
+        
 
         // Funções dos inimigos (mecânica)
         private void ProximaOnda(int dificuldade)
