@@ -459,6 +459,11 @@ namespace JogoTeste
             CriarImagensInimigos();
             ondaAtual +=  1;
             labelOndaNum.Text = $"Onda {ondaAtual}";
+            dificuldadeAtual = (ondaAtual / 5) + 1;
+            if (dificuldadeAtual > 5)
+            {
+                dificuldadeAtual = 5;
+            }
         }
         private void AtualizarRecursosInimigo()
         {
