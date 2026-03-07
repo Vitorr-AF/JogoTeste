@@ -25,6 +25,9 @@ namespace JogoTeste.Services
             }
         }
 
-        
+        public static void AcaoInimigo(Inimigo inimigo, Player player)
+        {
+            DanoAoPlayer(player, inimigo.Dano);
+        }
     }
 }

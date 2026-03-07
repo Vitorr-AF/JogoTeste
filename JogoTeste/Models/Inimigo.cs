@@ -8,5 +8,6 @@ namespace JogoTeste.Models
         public int Dano { get; set; }
         public string CaminhoImagem { get; set; }
         public bool Vivo { get; set; }
+        public int Velocidade { get; set; }
     }
 }

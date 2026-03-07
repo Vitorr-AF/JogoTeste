@@ -36,6 +36,9 @@
             panelCentroJogo1 = new Panel();
             panelEnemies = new Panel();
             panelControls = new Panel();
+            panelTurnoInimigo = new Panel();
+            labelTurnoInimigo = new Label();
+            labelOndaNum = new Label();
             labelDebug = new Label();
             labelVidaInimigo = new Label();
             labelVida = new Label();
@@ -62,12 +65,12 @@
             btnVoltar2 = new Button();
             panelSkillsMenu = new Panel();
             btnVoltar1 = new Button();
-            labelOndaNum = new Label();
             panelMenu.SuspendLayout();
             panelCentroMenu.SuspendLayout();
             panelJogo1.SuspendLayout();
             panelCentroJogo1.SuspendLayout();
             panelControls.SuspendLayout();
+            panelTurnoInimigo.SuspendLayout();
             panelFundoVidaInimigo.SuspendLayout();
             panelFundoEnergia.SuspendLayout();
             panelFundoVida.SuspendLayout();
@@ -148,6 +151,7 @@
             // 
             // panelControls
             // 
+            panelControls.Controls.Add(panelTurnoInimigo);
             panelControls.Controls.Add(labelOndaNum);
             panelControls.Controls.Add(labelDebug);
             panelControls.Controls.Add(labelVidaInimigo);
@@ -167,6 +171,32 @@
             panelControls.Name = "panelControls";
             panelControls.Size = new Size(773, 188);
             panelControls.TabIndex = 2;
+            // 
+            // panelTurnoInimigo
+            // 
+            panelTurnoInimigo.Controls.Add(labelTurnoInimigo);
+            panelTurnoInimigo.Location = new Point(209, 10);
+            panelTurnoInimigo.Name = "panelTurnoInimigo";
+            panelTurnoInimigo.Size = new Size(561, 154);
+            panelTurnoInimigo.TabIndex = 12;
+            panelTurnoInimigo.Visible = false;
+            // 
+            // labelTurnoInimigo
+            // 
+            labelTurnoInimigo.AutoSize = true;
+            labelTurnoInimigo.Location = new Point(267, 75);
+            labelTurnoInimigo.Name = "labelTurnoInimigo";
+            labelTurnoInimigo.Size = new Size(0, 15);
+            labelTurnoInimigo.TabIndex = 0;
+            // 
+            // labelOndaNum
+            // 
+            labelOndaNum.AutoSize = true;
+            labelOndaNum.Location = new Point(693, 167);
+            labelOndaNum.Name = "labelOndaNum";
+            labelOndaNum.Size = new Size(45, 15);
+            labelOndaNum.TabIndex = 11;
+            labelOndaNum.Text = "Onda 1";
             // 
             // labelDebug
             // 
@@ -427,15 +457,6 @@
             btnVoltar1.UseVisualStyleBackColor = true;
             btnVoltar1.Click += btnVoltar1_Click;
             // 
-            // labelOndaNum
-            // 
-            labelOndaNum.AutoSize = true;
-            labelOndaNum.Location = new Point(693, 167);
-            labelOndaNum.Name = "labelOndaNum";
-            labelOndaNum.Size = new Size(45, 15);
-            labelOndaNum.TabIndex = 11;
-            labelOndaNum.Text = "Onda 1";
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -454,6 +475,8 @@
             panelCentroJogo1.ResumeLayout(false);
             panelControls.ResumeLayout(false);
             panelControls.PerformLayout();
+            panelTurnoInimigo.ResumeLayout(false);
+            panelTurnoInimigo.PerformLayout();
             panelFundoVidaInimigo.ResumeLayout(false);
             panelFundoEnergia.ResumeLayout(false);
             panelFundoVida.ResumeLayout(false);
@@ -502,5 +525,7 @@
         private Panel panelPlayerImage;
         private Label labelDebug;
         private Label labelOndaNum;
+        private Panel panelTurnoInimigo;
+        private Label labelTurnoInimigo;
     }
 }

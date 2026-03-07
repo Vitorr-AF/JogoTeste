@@ -8,5 +8,6 @@ namespace JogoTeste.Models
         public int EnergiaAtual;
         public int DanoAtaque;
         public int TaxaAcerto;
+        public int Velocidade;
     }
 }

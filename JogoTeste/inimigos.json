@@ -4,12 +4,14 @@
       "Nome": "Slime",
       "VidaMax": 50,
       "Dano": 5,
+      "Velocidade":  2,
       "CaminhoImagem": "Assets/imagens/inimigo.png"
     },
     {
       "Nome": "Rato",
       "VidaMax": 40,
       "Dano": 7,
+      "Velocidade":  5,
       "CaminhoImagem": "Assets/imagens/inimigo.png"
     }
   ],
@@ -18,6 +20,7 @@
       "Nome": "Goblin",
       "VidaMax": 80,
       "Dano": 12,
+      "Velocidade":  7,
       "CaminhoImagem": "Assets/imagens/inimigo.png"
     }
   ]

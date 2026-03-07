@@ -37,6 +37,8 @@ namespace JogoTeste
         List<Inimigo> inimigos = new List<Inimigo>();
         private List<PictureBox> imagensInimigos = new List<PictureBox>();
         private PictureBox? inimigoSelecionadoPB = null;
+        List<object> ordemTurnos = new List<object>();
+        int turnoAtual;
         int inimigoSelecionadoIndice = -1;
         bool inimigoSelecionado;
         bool inimigoSelecionadoClicado;
@@ -45,6 +47,23 @@ namespace JogoTeste
         int dificuldadeAtual = 1;
         int ondaAtual = 0;
         
+        private void IniciarJogo()
+        {
+            InimigosPorNivel = EnemyService.CarregarInimigos();
+            player = new Player
+            {
+                VidaMax = 100,
+                VidaAtual = 100,
+                EnergiaMax = 100,
+                EnergiaAtual = 100,
+                DanoAtaque = 20,
+                TaxaAcerto = 100,
+            };
+            AtualizarRecursos();
+            ProximaOnda(dificuldadeAtual);
+            ordemTurnos = TurnService.GerarOrdemTurnos(player, inimigos);
+            turnoAtual = 0;
+        }
         
 
         // Botões do Menu de Inicio, e suas funções
@@ -60,21 +79,6 @@ namespace JogoTeste
             Application.Exit();
         }
 
-        private void IniciarJogo()
-        {
-            InimigosPorNivel = EnemyService.CarregarInimigos();
-            player = new Player
-            {
-                VidaMax = 100,
-                VidaAtual = 100,
-                EnergiaMax = 100,
-                EnergiaAtual = 100,
-                DanoAtaque = 20,
-                TaxaAcerto = 100,
-            };
-            AtualizarRecursos();
-            ProximaOnda(dificuldadeAtual);
-        }
 
         // Barra de Vida e de Energia, e suas funções
         private void panelFrenteVida_MouseEnter(object sender, EventArgs e)
@@ -177,6 +181,8 @@ namespace JogoTeste
             {
                 CombatService.DanoAoInimigo(inimigo, player.DanoAtaque);
                 AtualizarRecursos();
+                ProximoTurno();
+                
             }
             else
             {
@@ -418,6 +424,57 @@ namespace JogoTeste
             labelOndaNum.Text = $"Onda {ondaAtual}";
 
             dificuldadeAtual = EnemyService.CalcularDificuldade(ondaAtual);
+
+            
+
+            
+        }
+
+        private async void ProximoTurno()
+        {
+            turnoAtual++;
+
+            if (turnoAtual >= ordemTurnos.Count)
+            {
+                ordemTurnos = TurnService.GerarOrdemTurnos(player, inimigos);
+                turnoAtual = 0;
+            }
+
+            var entidade = ordemTurnos[turnoAtual];
+
+            if (entidade is Inimigo inimigo && !inimigo.Vivo)
+            {
+                ProximoTurno();
+                return;
+            }
+
+            if (entidade is Player)
+            {
+                TurnoPlayer();
+            }
+            else if (entidade is Inimigo inimigo2)
+            {
+                TurnoInimigo();
+                labelTurnoInimigo.Text = $"Turno de {inimigo2.Nome}";
+
+                await Task.Delay(1200);
+
+                CombatService.AcaoInimigo(inimigo2, player);
+                AtualizarRecursos();
+
+                ProximoTurno();
+            }
+        }
+
+        private void TurnoInimigo()
+        {
+            panelTurnoInimigo.Visible = true;
+        }
+
+        private void TurnoPlayer()
+        {
+            VoltarMenuControles();
+            panelTurnoInimigo.Visible = false;
         }
 
     }
