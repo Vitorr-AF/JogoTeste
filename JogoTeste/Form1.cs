@@ -19,6 +19,7 @@ namespace JogoTeste
 
         UIHelper uiHelper = new UIHelper();
         CombatService combatService = new CombatService();
+        EnemyService enemyService = new EnemyService();
         // Funções de Centralização do form com tela cheia
         
 
@@ -61,7 +62,7 @@ namespace JogoTeste
 
         private void IniciarJogo()
         {
-            CarregarInimigos();
+            InimigosPorNivel = EnemyService.CarregarInimigos();
             player = new Player
             {
                 VidaMax = 100,
@@ -174,7 +175,7 @@ namespace JogoTeste
 
             if (numeroAcerto <= player.TaxaAcerto)
             {
-                combatService.DanoAoInimigo(inimigo, player.DanoAtaque);
+                CombatService.DanoAoInimigo(inimigo, player.DanoAtaque);
                 AtualizarRecursos();
             }
             else
@@ -395,17 +396,6 @@ namespace JogoTeste
 
 
 
-        
-        private void CarregarInimigos()
-        {
-            string json = File.ReadAllText("inimigos.json");
-
-            InimigosPorNivel =
-                JsonSerializer.Deserialize<Dictionary<int, List<Inimigo>>>(json);
-        }
-
-
-        
 
         
 
