@@ -343,6 +343,13 @@ namespace JogoTeste
             inimigos.Clear();
             imagensInimigos.Clear();
             panelEnemies.Controls.Clear();
+
+            labelNomeInimigo.Visible = false;
+            panelFundoVidaInimigo.Visible = false;
+            inimigoSelecionadoIndice = -1;
+            inimigoSelecionadoPB = null;
+            inimigoSelecionado = false;
+            inimigoSelecionadoClicado = false;
         }
 
         private void AtualizarRecursos()
@@ -393,52 +400,25 @@ namespace JogoTeste
             labelMensagens.Text = mensagem;
         }
 
-
-
-
-
-        
-
-        // Funções dos inimigos (mecânica)
         private void ProximaOnda(int dificuldade)
         {
             LimparInimigos();
-            labelNomeInimigo.Visible = false;
-            panelFundoVidaInimigo.Visible = false;
-            inimigoSelecionadoIndice = -1;
-            inimigoSelecionadoPB = null;
-            inimigoSelecionado = false;
-            inimigoSelecionadoClicado = false;
 
-            int quantidadeInimigos = random.Next(1, dificuldade + 2); // Aparentemente o random.next exclui o valor max
-            // A linha embaixo dessa é pra mudar diretamente a quantidade, por padrão é pra deixar comentada
-            //int quantidadeInimigos = 6;
-            var banco = InimigosPorNivel[dificuldade];
-            for (int i = 0; i < quantidadeInimigos; i++)
-            {
-                var modelo = banco[random.Next(banco.Count)];
-                inimigos.Add(new Inimigo
-                {
-                    Nome = modelo.Nome,
-                    VidaMax = modelo.VidaMax,
-                    VidaAtual = modelo.VidaMax,
-                    Dano = modelo.Dano,
-                    CaminhoImagem = modelo.CaminhoImagem,
-                    Vivo = true
-                });
-            }
+            EnemyService.GerarInimigos(
+                dificuldade,
+                random,
+                InimigosPorNivel,
+                inimigos
+            );
 
             CriarImagensInimigos();
-            ondaAtual +=  1;
-            labelOndaNum.Text = $"Onda {ondaAtual}";
-            dificuldadeAtual = (ondaAtual / 5) + 1;
-            if (dificuldadeAtual > 5)
-            {
-                dificuldadeAtual = 5;
-            }
-        }
-        
 
-        
+            ondaAtual++;
+
+            labelOndaNum.Text = $"Onda {ondaAtual}";
+
+            dificuldadeAtual = EnemyService.CalcularDificuldade(ondaAtual);
+        }
+
     }
 }
