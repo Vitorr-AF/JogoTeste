@@ -21,7 +21,7 @@ namespace JogoTeste
         CombatService combatService = new CombatService();
         EnemyService enemyService = new EnemyService();
         // Funções de Centralização do form com tela cheia
-        
+
 
         private void Form1_Resize(object sender, EventArgs e)
         {
@@ -31,11 +31,13 @@ namespace JogoTeste
 
         // Definição das classes, objetos e variáveis
         private Player player;
+        ItemService itemService = new ItemService();
         private Random random = new Random();
         private Dictionary<int, List<Inimigo>> InimigosPorNivel =
             new Dictionary<int, List<Inimigo>>();
         List<Inimigo> inimigos = new List<Inimigo>();
         private List<PictureBox> imagensInimigos = new List<PictureBox>();
+        List<Item> inventario = new List<Item>();
         private PictureBox? inimigoSelecionadoPB = null;
         List<object> ordemTurnos = new List<object>();
         int turnoAtual;
@@ -46,9 +48,11 @@ namespace JogoTeste
         private const int TAMANHO_HOVER = 110;
         int dificuldadeAtual = 1;
         int ondaAtual = 0;
-        
+
         private void IniciarJogo()
         {
+            itemService.CarregarItens("itens.json");
+
             InimigosPorNivel = EnemyService.CarregarInimigos();
             player = new Player
             {
@@ -58,13 +62,15 @@ namespace JogoTeste
                 EnergiaAtual = 100,
                 DanoAtaque = 20,
                 TaxaAcerto = 100,
+                AcertoBonus = 0,
             };
+            AdicionarItem(1);
             AtualizarRecursos();
             ProximaOnda(dificuldadeAtual);
             ordemTurnos = TurnService.GerarOrdemTurnos(player, inimigos);
             turnoAtual = 0;
         }
-        
+
 
         // Botões do Menu de Inicio, e suas funções
         private void btnStartGame_Click(object sender, EventArgs e)
@@ -177,16 +183,18 @@ namespace JogoTeste
             ExibirMensagem("");
             int numeroAcerto = random.Next(1, 101);
 
-            if (numeroAcerto <= player.TaxaAcerto)
+            if (numeroAcerto <= (player.TaxaAcerto + player.AcertoBonus))
             {
                 CombatService.DanoAoInimigo(inimigo, player.DanoAtaque);
                 AtualizarRecursos();
                 ProximoTurno();
-                
+
             }
             else
             {
                 ExibirMensagem("Ataque errou!!!");
+                AtualizarRecursos();
+                ProximoTurno();
             }
 
         }
@@ -206,7 +214,7 @@ namespace JogoTeste
         private void Inimigo_MouseEnter(object? sender, EventArgs e)
         {
             PictureBox pb = (PictureBox)sender;
-            
+
             if (inimigoSelecionadoPB != null && inimigoSelecionadoPB != pb && inimigoSelecionadoIndice != (int)pb.Tag)
             {
                 uiHelper.DefinirTamanho(inimigoSelecionadoPB, TAMANHO_NORMAL);
@@ -214,7 +222,7 @@ namespace JogoTeste
                 inimigoSelecionadoClicado = false;
             }
             inimigoSelecionadoPB = pb;
-            
+
             inimigoSelecionadoIndice = (int)pb.Tag;
             inimigoSelecionado = true;
             if (!inimigoSelecionadoClicado)
@@ -234,7 +242,7 @@ namespace JogoTeste
                 inimigoSelecionado = false;
                 uiHelper.DefinirTamanho(pb, TAMANHO_NORMAL);
             }
-            
+
         }
         private void panelFrenteVidaInimigo_MouseEnter(object sender, EventArgs e)
         {
@@ -342,7 +350,7 @@ namespace JogoTeste
             panelFundoVidaInimigo.Visible = true;
         }
 
-        
+
 
         private void LimparInimigos()
         {
@@ -380,6 +388,14 @@ namespace JogoTeste
                 }
 
             }
+            if (player.AcertoBonus < 0)
+            {
+                labelAcertoBonus.Text = $"-{player.AcertoBonus}%";
+            }
+            else
+            {
+                labelAcertoBonus.Text = $"+{player.AcertoBonus}%";
+            }
 
 
             int larguraVida = (int)((player.VidaAtual / (float)player.VidaMax) * panelFundoVida.Width);
@@ -390,7 +406,7 @@ namespace JogoTeste
             panelFrenteEnergia.Width = larguraEnergia;
         }
 
-        
+
         private void VoltarMenuControles()
         {
             panelSkillsMenu.Visible = false;
@@ -425,9 +441,9 @@ namespace JogoTeste
 
             dificuldadeAtual = EnemyService.CalcularDificuldade(ondaAtual);
 
-            
 
-            
+
+
         }
 
         private async void ProximoTurno()
@@ -477,5 +493,45 @@ namespace JogoTeste
             panelTurnoInimigo.Visible = false;
         }
 
+        void AtualizarInventario()
+        {
+            flowInventario.Controls.Clear();
+
+            foreach (var item in inventario)
+            {
+                Button btn = new Button();
+
+                btn.Width = 80;
+                btn.Height = 80;
+
+                btn.Text = item.Nome;
+
+                btn.Tag = item;
+
+                btn.Click += Item_Click;
+
+                flowInventario.Controls.Add(btn);
+            }
+        }
+
+        void Item_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            Item item = (Item)btn.Tag;
+
+            MessageBox.Show(item.Nome);
+        }
+
+        void AdicionarItem(int id)
+        {
+            Item item = itemService.PegarItemPorID(id);
+
+            if (item != null)
+            {
+                inventario.Add(item);
+                AtualizarInventario();
+                itemService.AplicarStatusItem(player, item);
+            }
+        }
     }
 }

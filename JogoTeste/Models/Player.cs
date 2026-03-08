@@ -9,5 +9,6 @@ namespace JogoTeste.Models
         public int DanoAtaque;
         public int TaxaAcerto;
         public int Velocidade;
+        public int AcertoBonus;
     }
 }
