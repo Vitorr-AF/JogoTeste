@@ -521,7 +521,7 @@ namespace JogoTeste
             Button btn = (Button)sender;
             Item item = (Item)btn.Tag;
 
-            MessageBox.Show(item.Nome);
+            MessageBox.Show($"{item.Nome}:\n\n{item.Descricao}");
         }
 
         void AdicionarItem(int id)

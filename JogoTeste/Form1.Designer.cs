@@ -36,6 +36,7 @@
             panelCentroJogo1 = new Panel();
             panelEnemies = new Panel();
             panelItemsMenu = new Panel();
+            labelTituloInventario = new Label();
             flowInventario = new FlowLayoutPanel();
             btnVoltar2 = new Button();
             panelSkillsMenu = new Panel();
@@ -67,7 +68,6 @@
             labelTaxaAcerto = new Label();
             trackTaxaAcerto = new TrackBar();
             btnVoltar3 = new Button();
-            labelTituloInventario = new Label();
             panelMenu.SuspendLayout();
             panelCentroMenu.SuspendLayout();
             panelJogo1.SuspendLayout();
@@ -135,10 +135,10 @@
             // panelCentroJogo1
             // 
             panelCentroJogo1.Controls.Add(panelEnemies);
-            panelCentroJogo1.Controls.Add(panelItemsMenu);
-            panelCentroJogo1.Controls.Add(panelSkillsMenu);
             panelCentroJogo1.Controls.Add(panelControls);
             panelCentroJogo1.Controls.Add(panelStatusMenu);
+            panelCentroJogo1.Controls.Add(panelItemsMenu);
+            panelCentroJogo1.Controls.Add(panelSkillsMenu);
             panelCentroJogo1.Location = new Point(0, 0);
             panelCentroJogo1.Name = "panelCentroJogo1";
             panelCentroJogo1.Size = new Size(800, 450);
@@ -162,6 +162,15 @@
             panelItemsMenu.Size = new Size(773, 176);
             panelItemsMenu.TabIndex = 5;
             panelItemsMenu.Visible = false;
+            // 
+            // labelTituloInventario
+            // 
+            labelTituloInventario.AutoSize = true;
+            labelTituloInventario.Location = new Point(9, 10);
+            labelTituloInventario.Name = "labelTituloInventario";
+            labelTituloInventario.Size = new Size(63, 15);
+            labelTituloInventario.TabIndex = 2;
+            labelTituloInventario.Text = "Inventário:";
             // 
             // flowInventario
             // 
@@ -479,15 +488,6 @@
             btnVoltar3.Text = "Voltar";
             btnVoltar3.UseVisualStyleBackColor = true;
             btnVoltar3.Click += btnVoltar3_Click;
-            // 
-            // labelTituloInventario
-            // 
-            labelTituloInventario.AutoSize = true;
-            labelTituloInventario.Location = new Point(9, 10);
-            labelTituloInventario.Name = "labelTituloInventario";
-            labelTituloInventario.Size = new Size(63, 15);
-            labelTituloInventario.TabIndex = 2;
-            labelTituloInventario.Text = "Inventário:";
             // 
             // Form1
             // 

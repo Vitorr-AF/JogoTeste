@@ -3,15 +3,27 @@
     {
       "ID": 1,
       "Nome": "Trevo da Sorte",
+      "Descricao": "Um trevo de quatro folhas, aumenta sua taxa de acerto",
       "Status": {
-        "AcertoBonus": 100
+        "AcertoBonus": 10
       }
     },
     {
       "ID": 2,
       "Nome": "Espelho Quebrado",
+      "Descricao": "Um sinal de azar, diminúi sua taxa de acerto",
       "Status": {
         "AcertoBonus": -10
+      }
+    }
+  ],
+  "2": [
+    {
+      "ID": 3,
+      "Nome": "Bilhete premiado",
+      "Descricao": "Seis números certos num sorteio !!! Aumenta drásticamente sua taxa de acerto",
+      "Status": {
+        "AcertoBonus":  100
       }
     }
   ]
