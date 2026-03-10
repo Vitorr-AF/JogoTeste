@@ -49,9 +49,12 @@ namespace JogoTeste
         int dificuldadeAtual = 1;
         int ondaAtual = 0;
 
+
+
         private void IniciarJogo()
         {
             itemService.CarregarItens("itens.json");
+            pbPlayer.Image = Image.FromFile("Assets/imagens/player/Idle.png");
 
             InimigosPorNivel = EnemyService.CarregarInimigos();
             player = new Player
@@ -376,7 +379,7 @@ namespace JogoTeste
             else
             {
                 panelFrenteVida.BackColor = Color.LimeGreen;
-                labelVida.BackColor= Color.LimeGreen;
+                labelVida.BackColor = Color.LimeGreen;
             }
 
             if (inimigoSelecionadoIndice != -1 && inimigoSelecionadoIndice != null)
@@ -474,9 +477,10 @@ namespace JogoTeste
             {
                 TurnoInimigo();
                 labelTurnoInimigo.Text = $"Turno de {inimigo2.Nome}";
-
+                pbPlayer.Image = Image.FromFile("Assets/imagens/player/Hit.png");
                 await Task.Delay(1200);
 
+                pbPlayer.Image = Image.FromFile("Assets/imagens/player/Idle.png");
                 CombatService.AcaoInimigo(inimigo2, player);
                 AtualizarRecursos();
 
@@ -534,6 +538,11 @@ namespace JogoTeste
                 AtualizarInventario();
                 itemService.AplicarStatusItem(player, item);
             }
+        }
+        
+        private void pbPlayer_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

@@ -35,12 +35,6 @@
             panelJogo1 = new Panel();
             panelCentroJogo1 = new Panel();
             panelEnemies = new Panel();
-            panelItemsMenu = new Panel();
-            labelTituloInventario = new Label();
-            flowInventario = new FlowLayoutPanel();
-            btnVoltar2 = new Button();
-            panelSkillsMenu = new Panel();
-            btnVoltar1 = new Button();
             panelControls = new Panel();
             panelTurnoInimigo = new Panel();
             labelTurnoInimigo = new Label();
@@ -52,6 +46,7 @@
             labelMensagens = new Label();
             labelNomeInimigo = new Label();
             panelPlayerImage = new Panel();
+            pbPlayer = new PictureBox();
             panelFundoVidaInimigo = new Panel();
             panelFrenteVidaInimigo = new Panel();
             panelFundoEnergia = new Panel();
@@ -68,19 +63,27 @@
             labelTaxaAcerto = new Label();
             trackTaxaAcerto = new TrackBar();
             btnVoltar3 = new Button();
+            panelItemsMenu = new Panel();
+            labelTituloInventario = new Label();
+            flowInventario = new FlowLayoutPanel();
+            btnVoltar2 = new Button();
+            panelSkillsMenu = new Panel();
+            btnVoltar1 = new Button();
             panelMenu.SuspendLayout();
             panelCentroMenu.SuspendLayout();
             panelJogo1.SuspendLayout();
             panelCentroJogo1.SuspendLayout();
-            panelItemsMenu.SuspendLayout();
-            panelSkillsMenu.SuspendLayout();
             panelControls.SuspendLayout();
             panelTurnoInimigo.SuspendLayout();
+            panelPlayerImage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbPlayer).BeginInit();
             panelFundoVidaInimigo.SuspendLayout();
             panelFundoEnergia.SuspendLayout();
             panelFundoVida.SuspendLayout();
             panelStatusMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)trackTaxaAcerto).BeginInit();
+            panelItemsMenu.SuspendLayout();
+            panelSkillsMenu.SuspendLayout();
             SuspendLayout();
             // 
             // panelMenu
@@ -151,63 +154,6 @@
             panelEnemies.Size = new Size(770, 238);
             panelEnemies.TabIndex = 3;
             panelEnemies.Click += panelEnemies_Click;
-            // 
-            // panelItemsMenu
-            // 
-            panelItemsMenu.Controls.Add(labelTituloInventario);
-            panelItemsMenu.Controls.Add(flowInventario);
-            panelItemsMenu.Controls.Add(btnVoltar2);
-            panelItemsMenu.Location = new Point(9, 259);
-            panelItemsMenu.Name = "panelItemsMenu";
-            panelItemsMenu.Size = new Size(773, 176);
-            panelItemsMenu.TabIndex = 5;
-            panelItemsMenu.Visible = false;
-            // 
-            // labelTituloInventario
-            // 
-            labelTituloInventario.AutoSize = true;
-            labelTituloInventario.Location = new Point(9, 10);
-            labelTituloInventario.Name = "labelTituloInventario";
-            labelTituloInventario.Size = new Size(63, 15);
-            labelTituloInventario.TabIndex = 2;
-            labelTituloInventario.Text = "Inventário:";
-            // 
-            // flowInventario
-            // 
-            flowInventario.AutoScroll = true;
-            flowInventario.Location = new Point(3, 31);
-            flowInventario.Name = "flowInventario";
-            flowInventario.Size = new Size(358, 142);
-            flowInventario.TabIndex = 1;
-            // 
-            // btnVoltar2
-            // 
-            btnVoltar2.Location = new Point(698, 153);
-            btnVoltar2.Name = "btnVoltar2";
-            btnVoltar2.Size = new Size(75, 23);
-            btnVoltar2.TabIndex = 0;
-            btnVoltar2.Text = "Voltar";
-            btnVoltar2.UseVisualStyleBackColor = true;
-            btnVoltar2.Click += btnVoltar2_Click;
-            // 
-            // panelSkillsMenu
-            // 
-            panelSkillsMenu.Controls.Add(btnVoltar1);
-            panelSkillsMenu.Location = new Point(12, 259);
-            panelSkillsMenu.Name = "panelSkillsMenu";
-            panelSkillsMenu.Size = new Size(773, 176);
-            panelSkillsMenu.TabIndex = 4;
-            panelSkillsMenu.Visible = false;
-            // 
-            // btnVoltar1
-            // 
-            btnVoltar1.Location = new Point(698, 153);
-            btnVoltar1.Name = "btnVoltar1";
-            btnVoltar1.Size = new Size(75, 23);
-            btnVoltar1.TabIndex = 0;
-            btnVoltar1.Text = "Voltar";
-            btnVoltar1.UseVisualStyleBackColor = true;
-            btnVoltar1.Click += btnVoltar1_Click;
             // 
             // panelControls
             // 
@@ -320,10 +266,21 @@
             // 
             // panelPlayerImage
             // 
+            panelPlayerImage.Controls.Add(pbPlayer);
             panelPlayerImage.Location = new Point(22, 25);
             panelPlayerImage.Name = "panelPlayerImage";
             panelPlayerImage.Size = new Size(181, 160);
             panelPlayerImage.TabIndex = 10;
+            // 
+            // pbPlayer
+            // 
+            pbPlayer.Location = new Point(0, 0);
+            pbPlayer.Name = "pbPlayer";
+            pbPlayer.Size = new Size(181, 160);
+            pbPlayer.SizeMode = PictureBoxSizeMode.StretchImage;
+            pbPlayer.TabIndex = 0;
+            pbPlayer.TabStop = false;
+            pbPlayer.Click += pbPlayer_Click;
             // 
             // panelFundoVidaInimigo
             // 
@@ -489,6 +446,63 @@
             btnVoltar3.UseVisualStyleBackColor = true;
             btnVoltar3.Click += btnVoltar3_Click;
             // 
+            // panelItemsMenu
+            // 
+            panelItemsMenu.Controls.Add(labelTituloInventario);
+            panelItemsMenu.Controls.Add(flowInventario);
+            panelItemsMenu.Controls.Add(btnVoltar2);
+            panelItemsMenu.Location = new Point(9, 259);
+            panelItemsMenu.Name = "panelItemsMenu";
+            panelItemsMenu.Size = new Size(773, 176);
+            panelItemsMenu.TabIndex = 5;
+            panelItemsMenu.Visible = false;
+            // 
+            // labelTituloInventario
+            // 
+            labelTituloInventario.AutoSize = true;
+            labelTituloInventario.Location = new Point(9, 10);
+            labelTituloInventario.Name = "labelTituloInventario";
+            labelTituloInventario.Size = new Size(63, 15);
+            labelTituloInventario.TabIndex = 2;
+            labelTituloInventario.Text = "Inventário:";
+            // 
+            // flowInventario
+            // 
+            flowInventario.AutoScroll = true;
+            flowInventario.Location = new Point(3, 31);
+            flowInventario.Name = "flowInventario";
+            flowInventario.Size = new Size(358, 142);
+            flowInventario.TabIndex = 1;
+            // 
+            // btnVoltar2
+            // 
+            btnVoltar2.Location = new Point(698, 153);
+            btnVoltar2.Name = "btnVoltar2";
+            btnVoltar2.Size = new Size(75, 23);
+            btnVoltar2.TabIndex = 0;
+            btnVoltar2.Text = "Voltar";
+            btnVoltar2.UseVisualStyleBackColor = true;
+            btnVoltar2.Click += btnVoltar2_Click;
+            // 
+            // panelSkillsMenu
+            // 
+            panelSkillsMenu.Controls.Add(btnVoltar1);
+            panelSkillsMenu.Location = new Point(12, 259);
+            panelSkillsMenu.Name = "panelSkillsMenu";
+            panelSkillsMenu.Size = new Size(773, 176);
+            panelSkillsMenu.TabIndex = 4;
+            panelSkillsMenu.Visible = false;
+            // 
+            // btnVoltar1
+            // 
+            btnVoltar1.Location = new Point(698, 153);
+            btnVoltar1.Name = "btnVoltar1";
+            btnVoltar1.Size = new Size(75, 23);
+            btnVoltar1.TabIndex = 0;
+            btnVoltar1.Text = "Voltar";
+            btnVoltar1.UseVisualStyleBackColor = true;
+            btnVoltar1.Click += btnVoltar1_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -505,19 +519,21 @@
             panelCentroMenu.ResumeLayout(false);
             panelJogo1.ResumeLayout(false);
             panelCentroJogo1.ResumeLayout(false);
-            panelItemsMenu.ResumeLayout(false);
-            panelItemsMenu.PerformLayout();
-            panelSkillsMenu.ResumeLayout(false);
             panelControls.ResumeLayout(false);
             panelControls.PerformLayout();
             panelTurnoInimigo.ResumeLayout(false);
             panelTurnoInimigo.PerformLayout();
+            panelPlayerImage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pbPlayer).EndInit();
             panelFundoVidaInimigo.ResumeLayout(false);
             panelFundoEnergia.ResumeLayout(false);
             panelFundoVida.ResumeLayout(false);
             panelStatusMenu.ResumeLayout(false);
             panelStatusMenu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)trackTaxaAcerto).EndInit();
+            panelItemsMenu.ResumeLayout(false);
+            panelItemsMenu.PerformLayout();
+            panelSkillsMenu.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -563,5 +579,6 @@
         private Label labelAcertoBonus;
         private FlowLayoutPanel flowInventario;
         private Label labelTituloInventario;
+        private PictureBox pbPlayer;
     }
 }
