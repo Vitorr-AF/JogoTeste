@@ -189,6 +189,10 @@ namespace JogoTeste
             if (numeroAcerto <= (player.TaxaAcerto + player.AcertoBonus))
             {
                 CombatService.DanoAoInimigo(inimigo, player.DanoAtaque);
+                if (!inimigo.Vivo)
+                {
+                    inimigoSelecionadoPB.Image = Image.FromFile("Assets/imagens/Dead.png");
+                }
                 AtualizarRecursos();
                 ProximoTurno();
 
@@ -401,6 +405,8 @@ namespace JogoTeste
             {
                 labelAcertoBonus.Text = $"+{player.AcertoBonus}%";
             }
+
+            
 
 
             int larguraVida = (int)((player.VidaAtual / (float)player.VidaMax) * panelFundoVida.Width);

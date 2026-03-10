@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <None Remove="Assets\imagens\Goblin.png" />
-    <None Remove="Assets\imagens\inimigo.png" />
     <None Remove="Assets\imagens\player\Hit.png" />
     <None Remove="Assets\imagens\player\Idle.png" />
     <None Remove="Assets\imagens\Slime.png" />
@@ -22,7 +21,7 @@
     <Content Include="Assets\imagens\Goblin.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\imagens\inimigo.png">
+    <Content Include="Assets\imagens\Dead.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\imagens\player\Idle.png">
