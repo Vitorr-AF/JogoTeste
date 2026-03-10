@@ -371,10 +371,12 @@ namespace JogoTeste
             if (player.VidaAtual < (player.VidaMax * 0.3))
             {
                 panelFrenteVida.BackColor = Color.Red;
+                labelVida.BackColor = Color.Red;
             }
             else
             {
                 panelFrenteVida.BackColor = Color.LimeGreen;
+                labelVida.BackColor= Color.LimeGreen;
             }
 
             if (inimigoSelecionadoIndice != -1 && inimigoSelecionadoIndice != null)
