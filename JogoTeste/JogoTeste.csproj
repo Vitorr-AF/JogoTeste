@@ -9,17 +9,29 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\imagens\Goblin.png" />
     <None Remove="Assets\imagens\inimigo.png" />
     <None Remove="Assets\imagens\player\Hit.png" />
     <None Remove="Assets\imagens\player\Idle.png" />
+    <None Remove="Assets\imagens\Slime.png" />
+    <None Remove="Assets\imagens\Spider.png" />
     <None Remove="inimigos.json" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Assets\imagens\Goblin.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\imagens\inimigo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\imagens\player\Idle.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\imagens\Slime.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\imagens\Spider.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="inimigos.json">

@@ -5,14 +5,14 @@
       "VidaMax": 50,
       "Dano": 5,
       "Velocidade":  2,
-      "CaminhoImagem": "Assets/imagens/inimigo.png"
+      "CaminhoImagem": "Assets/imagens/Slime.png"
     },
     {
-      "Nome": "Rato",
+      "Nome": "Aranha",
       "VidaMax": 40,
       "Dano": 7,
       "Velocidade":  5,
-      "CaminhoImagem": "Assets/imagens/inimigo.png"
+      "CaminhoImagem": "Assets/imagens/Spider.png"
     }
   ],
   "2": [
@@ -21,7 +21,7 @@
       "VidaMax": 80,
       "Dano": 12,
       "Velocidade":  7,
-      "CaminhoImagem": "Assets/imagens/inimigo.png"
+      "CaminhoImagem": "Assets/imagens/Goblin.png"
     }
   ]
 }

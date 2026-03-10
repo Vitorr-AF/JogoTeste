@@ -478,11 +478,11 @@ namespace JogoTeste
                 TurnoInimigo();
                 labelTurnoInimigo.Text = $"Turno de {inimigo2.Nome}";
                 pbPlayer.Image = Image.FromFile("Assets/imagens/player/Hit.png");
+                CombatService.AcaoInimigo(inimigo2, player);
+                AtualizarRecursos();
                 await Task.Delay(1200);
 
                 pbPlayer.Image = Image.FromFile("Assets/imagens/player/Idle.png");
-                CombatService.AcaoInimigo(inimigo2, player);
-                AtualizarRecursos();
 
                 ProximoTurno();
             }
