@@ -228,7 +228,15 @@ namespace JogoTeste
 
             if (numeroAcerto <= (player.TaxaAcerto + player.AcertoBonus))
             {
-                CombatService.DanoAoInimigo(inimigo, player.DanoAtaque);
+                //Calcula o dano
+                int dano = player.DanoAtaque + player.DanoBonus;
+
+                //Aplica o dano
+                CombatService.DanoAoInimigo(inimigo, dano);
+
+                //Cura caso tenha roubo de vida
+                player.VidaAtual += (int)Math.Round(dano * player.RouboVida);
+
 
                 if (!inimigo.Vivo)
                 {
