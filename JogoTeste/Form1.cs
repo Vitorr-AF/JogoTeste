@@ -237,6 +237,11 @@ namespace JogoTeste
                 //Cura caso tenha roubo de vida
                 player.VidaAtual += (int)Math.Round(dano * player.RouboVida);
 
+                if (player.VidaAtual > (player.VidaMax + player.VidaBonus))
+                {
+                    player.VidaAtual = (player.VidaMax + player.VidaBonus);
+                }
+
 
                 if (!inimigo.Vivo)
                 {
