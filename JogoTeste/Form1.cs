@@ -508,6 +508,17 @@ namespace JogoTeste
         // =========================
         private async void ProximoTurno()
         {
+            labelNomeInimigo.Visible = false;
+            panelFundoVidaInimigo.Visible = false;
+
+            inimigoSelecionado = false;
+            inimigoSelecionadoClicado = false;
+
+            if (inimigoSelecionadoPB != null)
+            {
+                uiHelper.DefinirTamanho(inimigoSelecionadoPB, TAMANHO_NORMAL);
+            }
+
             turnoAtual++;
 
             if (turnoAtual >= ordemTurnos.Count)
