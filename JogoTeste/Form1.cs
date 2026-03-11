@@ -121,7 +121,7 @@ namespace JogoTeste
         // =========================
         private void panelFrenteVida_MouseEnter(object sender, EventArgs e)
         {
-            labelVida.Text = $"{player.VidaAtual}/{player.VidaMax}";
+            labelVida.Text = $"{player.VidaAtual}/{player.VidaMax + player.VidaBonus}";
             labelVida.Visible = true;
         }
 
@@ -132,7 +132,7 @@ namespace JogoTeste
 
         private void panelFundoVida_MouseEnter(object sender, EventArgs e)
         {
-            labelVida.Text = $"{player.VidaAtual}/{player.VidaMax}";
+            labelVida.Text = $"{player.VidaAtual}/{player.VidaMax + player.VidaBonus}";
             labelVida.Visible = true;
         }
 
@@ -143,7 +143,7 @@ namespace JogoTeste
 
         private void panelFrenteEnergia_MouseEnter(object sender, EventArgs e)
         {
-            labelEnergia.Text = $"{player.EnergiaAtual}/{player.EnergiaMax}";
+            labelEnergia.Text = $"{player.EnergiaAtual}/{player.EnergiaMax + player.EnergiaBonus}";
             labelEnergia.Visible = true;
         }
 
@@ -154,7 +154,7 @@ namespace JogoTeste
 
         private void panelFundoEnergia_MouseEnter(object sender, EventArgs e)
         {
-            labelEnergia.Text = $"{player.EnergiaAtual}/{player.EnergiaMax}";
+            labelEnergia.Text = $"{player.EnergiaAtual}/{player.EnergiaMax + player.EnergiaBonus}";
             labelEnergia.Visible = true;
         }
 
@@ -429,7 +429,7 @@ namespace JogoTeste
         // =========================
         private void AtualizarRecursos()
         {
-            if (player.VidaAtual < (player.VidaMax * 0.3))
+            if (player.VidaAtual < ((player.VidaMax + player.VidaBonus) * 0.3))
             {
                 panelFrenteVida.BackColor = Color.Red;
                 labelVida.BackColor = Color.Red;
@@ -459,9 +459,9 @@ namespace JogoTeste
             else
                 labelAcertoBonus.Text = $"+{player.AcertoBonus}%";
 
-            int larguraVida = (int)((player.VidaAtual / (float)player.VidaMax) * panelFundoVida.Width);
+            int larguraVida = (int)((player.VidaAtual / (float)(player.VidaMax + player.VidaBonus)) * panelFundoVida.Width);
 
-            int larguraEnergia = (int)((player.EnergiaAtual / (float)player.EnergiaMax) * panelFundoEnergia.Width);
+            int larguraEnergia = (int)((player.EnergiaAtual / (float)(player.EnergiaMax + player.VidaBonus)) * panelFundoEnergia.Width);
 
             panelFrenteVida.Width = larguraVida;
 
